@@ -15,7 +15,7 @@ class DashboardScreen extends StatelessWidget {
     },
     {
       "label": Strings.bookmark,
-      "icon": Icons.bookmark_add_outlined,
+      "icon": Icons.bookmark_added_outlined,
       "route": "/bookmark",
     },
   ];
@@ -60,7 +60,9 @@ class DashboardScreen extends StatelessWidget {
                   children: [
                     Icon(
                       item['icon'],
-                      color: isSelected ? Pallete.navItemActiveColor : Pallete.navItemInactiveColor,
+                      color: isSelected
+                          ? Pallete.navItemActiveColor
+                          : Pallete.navItemInactiveColor,
                     ),
                     if (isSelected) ...[
                       const SizedBox(width: 8),

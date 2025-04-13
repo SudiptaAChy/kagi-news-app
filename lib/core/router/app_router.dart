@@ -1,20 +1,32 @@
 import 'package:go_router/go_router.dart';
 import 'package:kagi_news_app/core/router/route_names.dart';
-import 'package:kagi_news_app/features/dashboard/dashboard_screen.dart';
-import 'package:kagi_news_app/features/splash/splash_screen.dart';
+import 'package:kagi_news_app/features/bookmarks/views/bookmark_screen.dart';
+import 'package:kagi_news_app/features/dashboard/views/dashboard_screen.dart';
+import 'package:kagi_news_app/features/news_list/views/news_list_screen.dart';
+import 'package:kagi_news_app/features/splash/views/splash_screen.dart';
 
 final appRouter = GoRouter(
-  initialLocation: "/",
+  initialLocation: "/splash",
   routes: [
     GoRoute(
       name: RouteNames.splash,
-      path: "/",
+      path: "/splash",
       builder: (context, state) => const SplashScreen(),
     ),
-    GoRoute(
-      name: RouteNames.dashboard,
-      path: "/dashboard",
-      builder: (context, state) => const DashboardScreen(),
-    )
+    ShellRoute(
+      builder: (context, state, child) => DashboardScreen(child: child),
+      routes: [
+        GoRoute(
+          name: RouteNames.news,
+          path: "/news",
+          builder: (context, state) => const NewsListScreen(),
+        ),
+        GoRoute(
+          name: RouteNames.bookmark,
+          path: "/bookmark",
+          builder: (context, state) => const BookmarkScreen(),
+        )
+      ],
+    ),
   ],
 );

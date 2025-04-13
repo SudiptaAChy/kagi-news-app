@@ -36,7 +36,7 @@ class _SplashScreenState extends State<SplashScreen>
 
     _controller.addStatusListener((status) {
       if (status.isCompleted && mounted) {
-        context.goNamed(RouteNames.dashboard);
+        context.goNamed(RouteNames.news);
       }
     });
   }

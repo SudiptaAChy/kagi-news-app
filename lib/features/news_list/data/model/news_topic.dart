@@ -1,20 +1,20 @@
 import 'dart:convert';
 
-class NewsCategory {
+class NewsTopic {
   String? name;
   String? file;
 
-  NewsCategory({
+  NewsTopic({
     this.name,
     this.file,
   });
 
-  factory NewsCategory.fromRawJson(String str) =>
-      NewsCategory.fromJson(json.decode(str));
+  factory NewsTopic.fromRawJson(String str) =>
+      NewsTopic.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory NewsCategory.fromJson(Map<String, dynamic> json) => NewsCategory(
+  factory NewsTopic.fromJson(Map<String, dynamic> json) => NewsTopic(
         name: json["name"],
         file: json["file"],
       );

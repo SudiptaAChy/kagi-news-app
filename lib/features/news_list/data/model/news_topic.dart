@@ -1,7 +1,15 @@
 import 'dart:convert';
 
-class NewsTopic {
+import 'package:hive/hive.dart';
+
+part 'news_topic.g.dart';
+
+@HiveType(typeId: 1)
+class NewsTopic extends HiveObject {
+  @HiveField(0)
   String? name;
+
+  @HiveField(1)
   String? file;
 
   NewsTopic({

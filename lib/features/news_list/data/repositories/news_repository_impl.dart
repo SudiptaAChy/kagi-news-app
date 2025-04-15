@@ -4,18 +4,21 @@ import 'package:kagi_news_app/features/news_list/data/services/api/news_api_serv
 import 'package:kagi_news_app/features/news_list/data/services/db/news_db_service.dart';
 
 class NewsRepositoryImpl implements NewsRepository {
-  final NewsApiService apiService;
-  final NewsDbService dbService;
+  final NewsApiService _apiService;
+  final NewsDbService _dbService;
 
-  NewsRepositoryImpl(this.apiService, this.dbService);
+  NewsRepositoryImpl(this._apiService, this._dbService);
 
   @override
   Future<NewsTopicResponse?> fetchNewsTopic() async {
-    final apiResponse = await apiService.fetchNewsTopic();
+    final apiResponse = await _apiService.fetchNewsTopic();
 
-    if(apiResponse.error != null) {
-      // db call
+    if (apiResponse.error != null) {
+      return await _dbService.getNewsTopics();
     } else {
+      if (apiResponse.data != null) {
+        await _dbService.saveNewsTopics(apiResponse.data!);
+      }
       return apiResponse.data;
     }
   }

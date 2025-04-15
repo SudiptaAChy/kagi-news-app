@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:kagi_news_app/core/constants/strings.dart';
+import 'package:kagi_news_app/core/db/db_service.dart';
+import 'package:kagi_news_app/core/db/hive_boxes.dart';
 import 'package:kagi_news_app/core/router/app_router.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await DbService.init();
+  await HiveBoxes.init();
   runApp(const MyApp());
 }
 
@@ -16,9 +21,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routerConfig: appRouter,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true
-      ),
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true),
     );
   }
 }

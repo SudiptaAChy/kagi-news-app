@@ -1,6 +1,6 @@
 import 'package:kagi_news_app/core/db/db_service.dart';
 import 'package:kagi_news_app/core/db/hive_boxes.dart';
-import 'package:kagi_news_app/features/news_list/data/model/news_topic_response.dart';
+import 'package:kagi_news_app/features/news_list/data/model/news_topic/news_topic_response.dart';
 import 'package:kagi_news_app/features/news_list/data/services/db/news_db_service.dart';
 
 class NewsDBServiceImpl implements NewsDbService {

@@ -1,6 +1,6 @@
 import 'package:hive/hive.dart';
 
-import '../../features/news_list/data/model/news_topic_response.dart';
+import '../../features/news_list/data/model/news_topic/news_topic_response.dart';
 
 class HiveBoxes {
   HiveBoxes._();

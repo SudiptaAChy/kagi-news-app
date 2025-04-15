@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:hive/hive.dart';
-import 'package:kagi_news_app/features/news_list/data/model/news_topic.dart';
+import 'package:kagi_news_app/features/news_list/data/model/news_topic/news_topic.dart';
 
 part 'news_topic_response.g.dart';
 

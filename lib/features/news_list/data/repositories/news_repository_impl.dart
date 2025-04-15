@@ -15,7 +15,7 @@ class NewsRepositoryImpl implements NewsRepository {
     final apiResponse = await _apiService.fetchNewsTopic();
 
     if (apiResponse.error != null) {
-      return await _dbService.getNewsTopics();
+      return _dbService.getNewsTopics();
     }
 
     if (apiResponse.data != null) {
@@ -30,11 +30,11 @@ class NewsRepositoryImpl implements NewsRepository {
     final apiResponse = await _apiService.fetchNews(file);
 
     if (apiResponse.error != null) {
-      // return await _dbService.getNewsTopics();
+      return _dbService.getNews(file);
     }
 
     if (apiResponse.data != null) {
-      // await _dbService.saveNewsTopics(apiResponse.data!);
+      await _dbService.saveNews(apiResponse.data!, file);
     }
 
     return apiResponse.data;

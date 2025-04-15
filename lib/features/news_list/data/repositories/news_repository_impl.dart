@@ -1,3 +1,4 @@
+import 'package:kagi_news_app/features/news_list/data/model/news/news_response.dart';
 import 'package:kagi_news_app/features/news_list/data/model/news_topic/news_topic_response.dart';
 import 'package:kagi_news_app/features/news_list/data/repositories/news_repository.dart';
 import 'package:kagi_news_app/features/news_list/data/services/api/news_api_service.dart';
@@ -15,11 +16,27 @@ class NewsRepositoryImpl implements NewsRepository {
 
     if (apiResponse.error != null) {
       return await _dbService.getNewsTopics();
-    } else {
-      if (apiResponse.data != null) {
-        await _dbService.saveNewsTopics(apiResponse.data!);
-      }
-      return apiResponse.data;
     }
+
+    if (apiResponse.data != null) {
+      await _dbService.saveNewsTopics(apiResponse.data!);
+    }
+
+    return apiResponse.data;
+  }
+
+  @override
+  Future<NewsResponse?> fetchNews(String file) async {
+    final apiResponse = await _apiService.fetchNews(file);
+
+    if (apiResponse.error != null) {
+      // return await _dbService.getNewsTopics();
+    }
+
+    if (apiResponse.data != null) {
+      // await _dbService.saveNewsTopics(apiResponse.data!);
+    }
+
+    return apiResponse.data;
   }
 }

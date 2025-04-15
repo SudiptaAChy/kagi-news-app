@@ -19,7 +19,18 @@ class NetworkService {
               "Content-Type": "application/json",
             },
           ),
-        );
+        ) {
+    _dio.interceptors.add(
+      LogInterceptor(
+        request: true,
+        requestHeader: true,
+        requestBody: true,
+        responseBody: true,
+        responseHeader: false,
+        error: true,
+      ),
+    );
+  }
 
   Future<ApiResponse<T>> request<T>(
     String path, {

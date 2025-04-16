@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:kagi_news_app/core/views/custom_chip_box.dart';
 import 'package:kagi_news_app/features/news_list/data/model/news/news.dart';
 
 class NewsListItem extends StatefulWidget {
@@ -30,43 +31,21 @@ class _NewsListItemState extends State<NewsListItem> {
             children: [
               Row(
                 children: [
-                  (widget.news?.category != null)
-                      ? Container(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 4, horizontal: 8),
-                          decoration: BoxDecoration(
-                            color: Colors.red.shade100,
-                            borderRadius: BorderRadius.circular(6),
-                          ),
-                          child: Text(
-                            widget.news?.category ?? "",
-                            style: Theme.of(context).textTheme.labelSmall,
-                          ),
-                        )
-                      : Container(),
+                  if (widget.news?.category != null)
+                    CustomChipBox(
+                      title: widget.news?.category ?? "",
+                      bgcolor: Colors.red.shade100,
+                    ),
                   SizedBox(width: 10),
-                  (widget.news?.location != null)
-                      ? Container(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 4, horizontal: 8),
-                          decoration: BoxDecoration(
-                            color: Colors.grey.shade300,
-                            borderRadius: BorderRadius.circular(6),
-                          ),
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.location_pin,
-                                size: 15,
-                              ),
-                              Text(
-                                widget.news?.location ?? "",
-                                style: Theme.of(context).textTheme.labelSmall,
-                              ),
-                            ],
-                          ),
-                        )
-                      : Container(),
+                  if (widget.news?.location != null)
+                    CustomChipBox(
+                      title: widget.news?.location ?? "",
+                      icon: Icon(
+                        Icons.location_pin,
+                        size: 15,
+                      ),
+                      bgcolor: Colors.grey.shade300,
+                    ),
                 ],
               ),
               IconButton(

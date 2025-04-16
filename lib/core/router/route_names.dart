@@ -4,4 +4,5 @@ class RouteNames {
   static const splash = "splash_screen";
   static const news = "news";
   static const bookmark = "bookmark";
+  static const details = "details";
 }

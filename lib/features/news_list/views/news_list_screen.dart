@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:kagi_news_app/core/router/route_names.dart';
 import 'package:kagi_news_app/core/views/custom_tab_bar.dart';
 import 'package:kagi_news_app/features/news_list/viewModels/news_view_model.dart';
 import 'package:kagi_news_app/features/news_list/views/components/news_list_item.dart';
@@ -56,7 +58,14 @@ class _NewsListScreenState extends State<NewsListScreen>
                 : Expanded(
                     child: ListView.separated(
                       itemCount: viewModel.news?.news?.length ?? 0,
-                      itemBuilder: (context, index) =>NewsListItem(news: viewModel.news?.news?[index]),
+                      itemBuilder: (context, index) => InkWell(
+                          onTap: () => context.pushNamed(
+                                RouteNames.details,
+                                extra: viewModel.news?.news?[index],
+                              ),
+                          child: NewsListItem(
+                            news: viewModel.news?.news?[index],
+                          )),
                       separatorBuilder: (context, index) => Divider(),
                     ),
                   ),

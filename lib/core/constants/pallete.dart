@@ -8,4 +8,7 @@ class Pallete {
   static const navBarBgColor = Color(0xfffff3e0);
   static const navItemActiveColor = Colors.black;
   static const navItemInactiveColor = Colors.grey;
+  static final cardBg = Colors.grey[50];
+  static final quoteCardBg = Colors.blue[50];
+  static const urlColor = Colors.blue;
 }

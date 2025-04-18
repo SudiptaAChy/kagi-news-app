@@ -1,5 +1,5 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:kagi_news_app/core/views/cached_network_image_view.dart';
 import 'package:kagi_news_app/core/views/custom_chip_box.dart';
 import 'package:kagi_news_app/features/news_list/data/model/news/news.dart';
 
@@ -17,8 +17,7 @@ class _NewsListItemState extends State<NewsListItem> {
     final coverImage = widget.news?.articles
         ?.where((item) => item.image != null && item.image!.isNotEmpty)
         .toList()
-        .firstOrNull
-        ?.image;
+        .firstOrNull;
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -29,24 +28,29 @@ class _NewsListItemState extends State<NewsListItem> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                children: [
-                  if (widget.news?.category != null)
-                    CustomChipBox(
-                      title: widget.news?.category ?? "",
-                      bgcolor: Colors.red.shade100,
-                    ),
-                  SizedBox(width: 10),
-                  if (widget.news?.location != null)
-                    CustomChipBox(
-                      title: widget.news?.location ?? "",
-                      icon: Icon(
-                        Icons.location_pin,
-                        size: 15,
-                      ),
-                      bgcolor: Colors.grey.shade300,
-                    ),
-                ],
+              Expanded(
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    spacing: 10,
+                    children: [
+                      if (widget.news?.category?.isNotEmpty == true)
+                        CustomChipBox(
+                          title: widget.news?.category ?? "",
+                          bgcolor: Colors.red.shade100,
+                        ),
+                      if (widget.news?.location?.isNotEmpty == true)
+                        CustomChipBox(
+                          title: widget.news?.location ?? "",
+                          icon: Icon(
+                            Icons.location_pin,
+                            size: 15,
+                          ),
+                          bgcolor: Colors.grey.shade300,
+                        ),
+                    ],
+                  ),
+                ),
               ),
               IconButton(
                 onPressed: () {},
@@ -58,16 +62,11 @@ class _NewsListItemState extends State<NewsListItem> {
             widget.news?.title ?? "",
             style: Theme.of(context).textTheme.titleLarge,
           ),
-          (coverImage != null)
-              ? AspectRatio(
-                  aspectRatio: 16 / 9,
-                  child: CachedNetworkImage(
-                    width: double.infinity,
-                    imageUrl: coverImage,
-                    errorWidget: (context, url, error) => Icon(Icons.error),
-                  ),
-                )
-              : Container(),
+          if (coverImage != null)
+            CachedNetworkImageView(
+              url: coverImage.image,
+              source: coverImage.domain,
+            ),
           SizedBox(height: 5),
           Text(
             "${widget.news?.articles?.length ?? 0} reports",

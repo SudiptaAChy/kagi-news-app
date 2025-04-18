@@ -4,6 +4,7 @@ import 'package:hive/hive.dart';
 import 'package:kagi_news_app/features/news_list/data/model/news/perspective.dart';
 import 'package:kagi_news_app/features/news_list/data/model/news/article.dart';
 import 'package:kagi_news_app/features/news_list/data/model/news/domain.dart';
+import 'package:uuid/uuid.dart';
 
 part 'news.g.dart';
 
@@ -131,6 +132,9 @@ class News extends HiveObject {
 
   @HiveField(40)
   List<Domain>? domains;
+
+  @HiveField(41)
+  String? uid = const Uuid().v4();
 
   News({
     this.clusterNumber,

@@ -58,13 +58,13 @@ class NewsAdapter extends TypeAdapter<News> {
       technicalSpecifications: fields[38] as String?,
       articles: (fields[39] as List?)?.cast<Article>(),
       domains: (fields[40] as List?)?.cast<Domain>(),
-    );
+    )..uid = fields[41] as String;
   }
 
   @override
   void write(BinaryWriter writer, News obj) {
     writer
-      ..writeByte(41)
+      ..writeByte(42)
       ..writeByte(0)
       ..write(obj.clusterNumber)
       ..writeByte(1)
@@ -146,7 +146,9 @@ class NewsAdapter extends TypeAdapter<News> {
       ..writeByte(39)
       ..write(obj.articles)
       ..writeByte(40)
-      ..write(obj.domains);
+      ..write(obj.domains)
+      ..writeByte(41)
+      ..write(obj.uid);
   }
 
   @override

@@ -37,13 +37,16 @@ class DbService {
 
   Future<void> add<T>(Box<T> box, T data) async => await box.add(data);
 
-  Future<void> save<T>(Box<T> box, String key, T data) async => await box.put(key, data);
+  Future<void> save<T>(Box<T> box, String key, T data) async =>
+      await box.put(key, data);
 
   Future<void> update<T>(Box<T> box, int index, T data) async =>
       await box.putAt(index, data);
 
-  Future<void> delete<T>(Box<T> box, String key) async =>
-      await box.delete(key);
+  Future<void> delete<T>(Box<T> box, String key) async => await box.delete(key);
+
+  Future<void> deleteAt<T>(Box<T> box, int index) async =>
+      await box.deleteAt(index);
 
   Future<void> clear<T>(Box<T> box) async => await box.clear();
 }

@@ -4,6 +4,7 @@ import 'package:kagi_news_app/core/db/db_service.dart';
 import 'package:kagi_news_app/core/db/hive_boxes.dart';
 import 'package:kagi_news_app/core/di/di.dart';
 import 'package:kagi_news_app/core/router/app_router.dart';
+import 'package:kagi_news_app/features/bookmarks/viewModels/bookmark_viewmodel.dart';
 import 'package:kagi_news_app/features/news_list/viewModels/news_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => getIt<NewsViewModel>()),
+        ChangeNotifierProvider(create: (context) => getIt<BookmarkViewmodel>()),
       ],
       child: MaterialApp.router(
         title: Strings.appTitle,

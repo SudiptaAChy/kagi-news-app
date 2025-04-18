@@ -27,4 +27,5 @@ class Strings {
   static const travelAdvisory = "Travel advisory";
   static const performanceStatistics = "Performance statistics";
   static const leagueStandings = "League standings";
+  static const nothingFound = "No item found!";
 }

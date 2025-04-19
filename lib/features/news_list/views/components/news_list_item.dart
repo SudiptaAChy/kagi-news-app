@@ -3,11 +3,12 @@ import 'package:kagi_news_app/core/views/cached_network_image_view.dart';
 import 'package:kagi_news_app/core/views/custom_chip_box.dart';
 import 'package:kagi_news_app/features/news_list/data/model/news/news.dart';
 
-class NewsListItem extends StatefulWidget {
+class NewsListItem extends StatelessWidget {
   final News? news;
   final bool isBookmarked;
   final void Function() onBookmarkAdd;
   final void Function() onBookmarkRemove;
+
   const NewsListItem(
       {required this.news,
       required this.isBookmarked,
@@ -16,13 +17,8 @@ class NewsListItem extends StatefulWidget {
       super.key});
 
   @override
-  State<NewsListItem> createState() => _NewsListItemState();
-}
-
-class _NewsListItemState extends State<NewsListItem> {
-  @override
   Widget build(BuildContext context) {
-    final coverImage = widget.news?.articles
+    final coverImage = news?.articles
         ?.where((item) => item.image != null && item.image!.isNotEmpty)
         .toList()
         .firstOrNull;
@@ -42,14 +38,14 @@ class _NewsListItemState extends State<NewsListItem> {
                   child: Row(
                     spacing: 10,
                     children: [
-                      if (widget.news?.category?.isNotEmpty == true)
+                      if (news?.category?.isNotEmpty == true)
                         CustomChipBox(
-                          title: widget.news?.category ?? "",
+                          title: news?.category ?? "",
                           bgcolor: Colors.red.shade100,
                         ),
-                      if (widget.news?.location?.isNotEmpty == true)
+                      if (news?.location?.isNotEmpty == true)
                         CustomChipBox(
-                          title: widget.news?.location ?? "",
+                          title: news?.location ?? "",
                           icon: Icon(
                             Icons.location_pin,
                             size: 15,
@@ -62,8 +58,8 @@ class _NewsListItemState extends State<NewsListItem> {
               ),
               IconButton(
                 onPressed: () {
-                  if (widget.isBookmarked) {
-                    widget.onBookmarkRemove();
+                  if (isBookmarked) {
+                    onBookmarkRemove();
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text('Bookmark removed successfully!'),
@@ -71,7 +67,7 @@ class _NewsListItemState extends State<NewsListItem> {
                       ),
                     );
                   } else {
-                    widget.onBookmarkAdd();
+                    onBookmarkAdd();
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text('Added to bookmark successfully!'),
@@ -80,14 +76,14 @@ class _NewsListItemState extends State<NewsListItem> {
                     );
                   }
                 },
-                icon: (widget.isBookmarked)
+                icon: (isBookmarked)
                     ? Icon(Icons.bookmark_added)
                     : Icon(Icons.bookmark_add_outlined),
               )
             ],
           ),
           Text(
-            widget.news?.title ?? "",
+            news?.title ?? "",
             style: Theme.of(context).textTheme.titleLarge,
           ),
           if (coverImage != null)
@@ -95,11 +91,13 @@ class _NewsListItemState extends State<NewsListItem> {
               url: coverImage.image,
               source: coverImage.domain,
             ),
-          SizedBox(height: 5),
           Text(
-            "${widget.news?.articles?.length ?? 0} reports",
+            "${news?.articles?.length ?? 0} reports",
             style: TextStyle(
-                color: Colors.grey, fontSize: 12, fontWeight: FontWeight.bold),
+              color: Colors.grey,
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
+            ),
           )
         ],
       ),

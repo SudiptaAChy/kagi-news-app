@@ -4,39 +4,37 @@ import 'package:kagi_news_app/core/constants/pallete.dart';
 import 'package:kagi_news_app/core/constants/strings.dart';
 import 'package:kagi_news_app/core/views/cached_network_image_view.dart';
 import 'package:kagi_news_app/core/views/custom_chip_box.dart';
-import 'package:kagi_news_app/features/news_details/components/articles_view.dart';
-import 'package:kagi_news_app/features/news_details/components/bullet_list_view.dart';
-import 'package:kagi_news_app/features/news_details/components/did_you_know_view.dart';
-import 'package:kagi_news_app/features/news_details/components/highlights_view.dart';
-import 'package:kagi_news_app/features/news_details/components/horizontal_card_list_view.dart';
-import 'package:kagi_news_app/features/news_details/components/international_reaction_view.dart';
-import 'package:kagi_news_app/features/news_details/components/perspective_view.dart';
-import 'package:kagi_news_app/features/news_details/components/plain_information_view.dart';
-import 'package:kagi_news_app/features/news_details/components/quotes_view.dart';
-import 'package:kagi_news_app/features/news_details/components/timeline_view.dart';
+import 'package:kagi_news_app/features/news_details/views/components/articles_view.dart';
+import 'package:kagi_news_app/features/news_details/views/components/bullet_list_view.dart';
+import 'package:kagi_news_app/features/news_details/views/components/did_you_know_view.dart';
+import 'package:kagi_news_app/features/news_details/views/components/highlights_view.dart';
+import 'package:kagi_news_app/features/news_details/views/components/horizontal_card_list_view.dart';
+import 'package:kagi_news_app/features/news_details/views/components/international_reaction_view.dart';
+import 'package:kagi_news_app/features/news_details/views/components/perspective_view.dart';
+import 'package:kagi_news_app/features/news_details/views/components/plain_information_view.dart';
+import 'package:kagi_news_app/features/news_details/views/components/quotes_view.dart';
+import 'package:kagi_news_app/features/news_details/views/components/timeline_view.dart';
 import 'package:kagi_news_app/features/news_details/data/models/news_details_args.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class NewsDetailsScreen extends StatefulWidget {
+class NewsDetailsScreen extends StatelessWidget {
   final NewsDetailsArgs args;
   const NewsDetailsScreen({required this.args, super.key});
 
   @override
-  State<NewsDetailsScreen> createState() => _NewsDetailsScreenState();
-}
-
-class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
-  @override
   Widget build(BuildContext context) {
-    final news = widget.args.news;
-    final isBookmarked = widget.args.isBookmarked;
-    final onBookmarkAdd = widget.args.onBookmarkAdd;
-    final onBookmarkRemove = widget.args.onBookmarkRemove;
+    final news = args.news;
+    final isBookmarked = args.isBookmarked;
+    final onBookmarkAdd = args.onBookmarkAdd;
+    final onBookmarkRemove = args.onBookmarkRemove;
 
     final coverImage = news.articles
         ?.where((item) => item.image != null && item.image!.isNotEmpty)
         .toList()
         .firstOrNull;
+
+    final ValueNotifier<bool> bookmarkNotifier =
+        ValueNotifier<bool>(isBookmarked);
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -49,29 +47,34 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
           icon: Icon(Icons.arrow_back_ios_new),
         ),
         actions: [
-          IconButton(
-            onPressed: () {
-              if (isBookmarked) {
-                onBookmarkRemove();
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text('Bookmark removed successfully!'),
-                    duration: Duration(seconds: 2),
-                  ),
-                );
-              } else {
-                onBookmarkAdd();
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text('Added to bookmark successfully!'),
-                    duration: Duration(seconds: 2),
-                  ),
-                );
-              }
-            },
-            icon: (isBookmarked)
-                ? Icon(Icons.bookmark_added)
-                : Icon(Icons.bookmark_add_outlined),
+          ValueListenableBuilder(
+            valueListenable: bookmarkNotifier,
+            builder: (context, isBookmarked, _) => IconButton(
+              onPressed: () {
+                if (isBookmarked) {
+                  onBookmarkRemove();
+                  bookmarkNotifier.value = false;
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Bookmark removed successfully!'),
+                      duration: Duration(seconds: 2),
+                    ),
+                  );
+                } else {
+                  onBookmarkAdd();
+                  bookmarkNotifier.value = true;
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Added to bookmark successfully!'),
+                      duration: Duration(seconds: 2),
+                    ),
+                  );
+                }
+              },
+              icon: (isBookmarked)
+                  ? Icon(Icons.bookmark_added)
+                  : Icon(Icons.bookmark_add_outlined),
+            ),
           ),
         ],
       ),
@@ -110,13 +113,15 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
               news.title ?? "",
               style: Theme.of(context).textTheme.headlineLarge,
             ),
-            Text(
-              news.shortSummary ?? "",
-              style: Theme.of(context).textTheme.bodyLarge,
-            ),
+            if (news.shortSummary?.isNotEmpty == true)
+              Text(
+                news.shortSummary!,
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
 
             // Did you know
-            if (news.didYouKnow != null) DidYouKnowView(text: news.didYouKnow!),
+            if (news.didYouKnow?.isNotEmpty == true)
+              DidYouKnowView(text: news.didYouKnow!),
 
             //Cover photo
             if (coverImage != null)
@@ -131,7 +136,7 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
               HighlightsView(talkings: news.talkingPoints!),
 
             // Quote
-            if (news.quote != null)
+            if (news.quote?.isNotEmpty == true)
               QuotesView(
                 quote: news.quote!,
                 author: news.quoteAuthor,

@@ -70,6 +70,8 @@ class NewsViewModel extends ChangeNotifier {
 
   bool isBookmarked(News? news) {
     if (news == null) return false;
-    return _bookmarks?.any((item) => item == news) == true;
+    final allBookmarks = _bookmarkRepository.getAllBookmarkedNews();
+    final found = allBookmarks?.any((item) => item == news) == true;
+    return found;
   }
 }

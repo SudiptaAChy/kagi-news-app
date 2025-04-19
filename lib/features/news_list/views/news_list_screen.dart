@@ -34,7 +34,7 @@ class _NewsListScreenState extends State<NewsListScreen>
   @override
   Widget build(BuildContext context) {
     return Consumer<NewsViewModel>(
-      builder: (context, viewModel, child) {
+      builder: (context, viewModel, _) {
         final topicNames = viewModel.topics
                 ?.map((item) => item.name)
                 .whereType<String>()

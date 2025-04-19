@@ -35,7 +35,7 @@ class _BookmarkScreenState extends State<BookmarkScreen> {
         ],
       ),
       body: Consumer<BookmarkViewmodel>(
-        builder: (context, viewModel, child) =>
+        builder: (context, viewModel, _) =>
             (viewModel.bookmarks?.isNotEmpty == true)
                 ? ListView.builder(
                     itemCount: viewModel.bookmarks?.length,

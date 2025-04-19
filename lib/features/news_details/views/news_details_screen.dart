@@ -14,12 +14,12 @@ import 'package:kagi_news_app/features/news_details/components/perspective_view.
 import 'package:kagi_news_app/features/news_details/components/plain_information_view.dart';
 import 'package:kagi_news_app/features/news_details/components/quotes_view.dart';
 import 'package:kagi_news_app/features/news_details/components/timeline_view.dart';
-import 'package:kagi_news_app/features/news_list/data/model/news/news.dart';
+import 'package:kagi_news_app/features/news_details/data/models/news_details_args.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class NewsDetailsScreen extends StatefulWidget {
-  final News news;
-  const NewsDetailsScreen({required this.news, super.key});
+  final NewsDetailsArgs args;
+  const NewsDetailsScreen({required this.args, super.key});
 
   @override
   State<NewsDetailsScreen> createState() => _NewsDetailsScreenState();
@@ -28,7 +28,12 @@ class NewsDetailsScreen extends StatefulWidget {
 class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
   @override
   Widget build(BuildContext context) {
-    final coverImage = widget.news.articles
+    final news = widget.args.news;
+    final isBookmarked = widget.args.isBookmarked;
+    final onBookmarkAdd = widget.args.onBookmarkAdd;
+    final onBookmarkRemove = widget.args.onBookmarkRemove;
+
+    final coverImage = news.articles
         ?.where((item) => item.image != null && item.image!.isNotEmpty)
         .toList()
         .firstOrNull;
@@ -45,8 +50,28 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.bookmark_add_outlined),
+            onPressed: () {
+              if (isBookmarked) {
+                onBookmarkRemove();
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('Bookmark removed successfully!'),
+                    duration: Duration(seconds: 2),
+                  ),
+                );
+              } else {
+                onBookmarkAdd();
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('Added to bookmark successfully!'),
+                    duration: Duration(seconds: 2),
+                  ),
+                );
+              }
+            },
+            icon: (isBookmarked)
+                ? Icon(Icons.bookmark_added)
+                : Icon(Icons.bookmark_add_outlined),
           ),
         ],
       ),
@@ -62,14 +87,14 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
               child: Row(
                 spacing: 10,
                 children: [
-                  if (widget.news.category?.isNotEmpty == true)
+                  if (news.category?.isNotEmpty == true)
                     CustomChipBox(
-                      title: widget.news.category ?? "",
+                      title: news.category ?? "",
                       bgcolor: Colors.red.shade100,
                     ),
-                  if (widget.news.location?.isNotEmpty == true)
+                  if (news.location?.isNotEmpty == true)
                     CustomChipBox(
-                      title: widget.news.location ?? "",
+                      title: news.location ?? "",
                       icon: Icon(
                         Icons.location_pin,
                         size: 15,
@@ -82,17 +107,16 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
 
             // Primary information
             Text(
-              widget.news.title ?? "",
+              news.title ?? "",
               style: Theme.of(context).textTheme.headlineLarge,
             ),
             Text(
-              widget.news.shortSummary ?? "",
+              news.shortSummary ?? "",
               style: Theme.of(context).textTheme.bodyLarge,
             ),
 
             // Did you know
-            if (widget.news.didYouKnow != null)
-              DidYouKnowView(text: widget.news.didYouKnow!),
+            if (news.didYouKnow != null) DidYouKnowView(text: news.didYouKnow!),
 
             //Cover photo
             if (coverImage != null)
@@ -103,105 +127,103 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
               ),
 
             // Talking Points
-            if (widget.news.talkingPoints != null &&
-                widget.news.talkingPoints!.isNotEmpty)
-              HighlightsView(talkings: widget.news.talkingPoints!),
+            if (news.talkingPoints != null && news.talkingPoints!.isNotEmpty)
+              HighlightsView(talkings: news.talkingPoints!),
 
             // Quote
-            if (widget.news.quote != null)
+            if (news.quote != null)
               QuotesView(
-                quote: widget.news.quote!,
-                author: widget.news.quoteAuthor,
-                domain: widget.news.quoteSourceDomain,
-                onLaunch: () => _launchUrl(widget.news.quoteSourceUrl, context),
+                quote: news.quote!,
+                author: news.quoteAuthor,
+                domain: news.quoteSourceDomain,
+                onLaunch: () => _launchUrl(news.quoteSourceUrl, context),
               ),
 
             // Perspective
-            if (widget.news.perspectives?.isNotEmpty == true)
+            if (news.perspectives?.isNotEmpty == true)
               PerspectiveView(
-                perspectives: widget.news.perspectives!,
+                perspectives: news.perspectives!,
                 onLaunch: (url) => _launchUrl(url, context),
               ),
 
             // Historical background
-            if (widget.news.historicalBackground?.isNotEmpty == true)
+            if (news.historicalBackground?.isNotEmpty == true)
               PlainInformationView(
                   title: Strings.historicalBackground,
-                  description: widget.news.historicalBackground!),
+                  description: news.historicalBackground!),
 
             // Travel advisory
-            if (widget.news.travelAdvisory?.isNotEmpty == true)
+            if (news.travelAdvisory?.isNotEmpty == true)
               BulletListView(
-                  title: Strings.travelAdvisory,
-                  items: widget.news.travelAdvisory!),
+                  title: Strings.travelAdvisory, items: news.travelAdvisory!),
 
             // Humanitarian Impact
-            if (widget.news.humanitarianImpact?.isNotEmpty == true)
+            if (news.humanitarianImpact?.isNotEmpty == true)
               PlainInformationView(
                   title: Strings.humanitarianImpact,
-                  description: widget.news.humanitarianImpact!),
+                  description: news.humanitarianImpact!),
 
             // International Reactions
-            if (widget.news.internationalReactions?.isNotEmpty == true)
+            if (news.internationalReactions?.isNotEmpty == true)
               InternationalReactionView(
-                  reactions: widget.news.internationalReactions!),
+                  reactions: news.internationalReactions!),
 
             // Event timeline
-            if (widget.news.timeline?.isNotEmpty == true)
-              TimelineView(timelines: widget.news.timeline!),
+            if (news.timeline?.isNotEmpty == true)
+              TimelineView(timelines: news.timeline!),
 
             // Technical details
-            if (widget.news.technicalDetails?.isNotEmpty == true)
+            if (news.technicalDetails?.isNotEmpty == true)
               HorizontalCardListView(
                   title: Strings.technicalDetails,
-                  items: widget.news.technicalDetails!),
+                  items: news.technicalDetails!),
 
             // Scientific Significance
-            if (widget.news.scientificSignificance?.isNotEmpty == true)
+            if (news.scientificSignificance?.isNotEmpty == true)
               HorizontalCardListView(
                 title: Strings.scientificSignificance,
-                items: widget.news.scientificSignificance!,
+                items: news.scientificSignificance!,
               ),
 
             // Gameplay mechanics
-            if (widget.news.gameplayMechanics?.isNotEmpty == true)
+            if (news.gameplayMechanics?.isNotEmpty == true)
               HorizontalCardListView(
                 title: Strings.gameplayMechanics,
-                items: widget.news.gameplayMechanics!,
+                items: news.gameplayMechanics!,
               ),
 
             // User experience impact
-            if (widget.news.userExperienceImpact?.isNotEmpty == true)
+            if (news.userExperienceImpact?.isNotEmpty == true)
               HorizontalCardListView(
                 title: Strings.userExperienceImpact,
-                items: widget.news.userExperienceImpact!,
+                items: news.userExperienceImpact!,
                 showSerial: true,
               ),
 
             // Business angle
-            if (widget.news.businessAngleText?.isNotEmpty == true)
+            if (news.businessAngleText?.isNotEmpty == true)
               PlainInformationView(
                 title: Strings.businessAngle,
-                description: widget.news.businessAngleText!,
+                description: news.businessAngleText!,
               ),
 
             // Business angle points
-            if (widget.news.businessAnglePoints?.isNotEmpty == true)
+            if (news.businessAnglePoints?.isNotEmpty == true)
               HorizontalCardListView(
                 title: Strings.businessAngle,
-                items: widget.news.businessAnglePoints!,
+                items: news.businessAnglePoints!,
               ),
 
             // Industry impact
-            if (widget.news.industryImpact?.isNotEmpty == true)
+            if (news.industryImpact?.isNotEmpty == true)
               HorizontalCardListView(
                 title: Strings.industryImpact,
-                items: widget.news.industryImpact!,
+                items: news.industryImpact!,
                 showSerial: true,
               ),
 
             // Performance Statictics
-            if (widget.news.performanceStatistics?.isNotEmpty == true)
+            if (news.performanceStatistics?.isNotEmpty == true)
               Card(
                 elevation: 0,
                 color: Pallete.cardBg,
@@ -209,29 +231,28 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
                   padding: const EdgeInsets.all(8.0),
                   child: BulletListView(
                     title: Strings.performanceStatistics,
-                    items: widget.news.performanceStatistics!,
+                    items: news.performanceStatistics!,
                   ),
                 ),
               ),
 
             // League standings
-            if (widget.news.leagueStandings?.isNotEmpty == true)
+            if (news.leagueStandings?.isNotEmpty == true)
               PlainInformationView(
                 title: Strings.leagueStandings,
-                description: widget.news.leagueStandings!,
+                description: news.leagueStandings!,
               ),
 
             // User action items
-            if (widget.news.userActionItems?.isNotEmpty == true)
+            if (news.userActionItems?.isNotEmpty == true)
               BulletListView(
-                  title: Strings.actionItems,
-                  items: widget.news.userActionItems!),
+                  title: Strings.actionItems, items: news.userActionItems!),
 
             // Related sources
-            if (widget.news.articles?.isNotEmpty == true)
+            if (news.articles?.isNotEmpty == true)
               ArticlesView(
-                articles: widget.news.articles!,
-                domains: widget.news.domains,
+                articles: news.articles!,
+                domains: news.domains,
                 onLaunch: (url) => _launchUrl(url, context),
               )
           ],

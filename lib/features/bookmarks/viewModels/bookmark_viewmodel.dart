@@ -18,5 +18,28 @@ class BookmarkViewmodel extends ChangeNotifier {
   Future<void> clearAllBookmarks() async {
     await _repository.deleteAllBookmarkedNews();
     _bookmarks?.clear();
+    notifyListeners();
+  }
+
+  Future<void> addToBookmark(News? news) async {
+    if (news == null) return;
+
+    await _repository.saveBookmark(news);
+
+    notifyListeners();
+  }
+
+  Future<void> removeFromBookmark(News? news) async {
+    if (news == null) return;
+
+    await _repository.removeBookmark(news);
+
+    notifyListeners();
+  }
+
+  bool isBookmarked(News? news) {
+    if (news == null) return false;
+
+    return _repository.isBookmarked(news);
   }
 }

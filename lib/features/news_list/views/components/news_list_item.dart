@@ -5,7 +5,15 @@ import 'package:kagi_news_app/features/news_list/data/model/news/news.dart';
 
 class NewsListItem extends StatefulWidget {
   final News? news;
-  const NewsListItem({required this.news, super.key});
+  final bool isBookmarked;
+  final void Function() onBookmarkAdd;
+  final void Function() onBookmarkRemove;
+  const NewsListItem(
+      {required this.news,
+      required this.isBookmarked,
+      required this.onBookmarkAdd,
+      required this.onBookmarkRemove,
+      super.key});
 
   @override
   State<NewsListItem> createState() => _NewsListItemState();
@@ -53,9 +61,29 @@ class _NewsListItemState extends State<NewsListItem> {
                 ),
               ),
               IconButton(
-                onPressed: () {},
-                icon: Icon(Icons.bookmark_add_outlined),
-              ),
+                onPressed: () {
+                  if (widget.isBookmarked) {
+                    widget.onBookmarkRemove();
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Bookmark removed successfully!'),
+                        duration: Duration(seconds: 2),
+                      ),
+                    );
+                  } else {
+                    widget.onBookmarkAdd();
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Added to bookmark successfully!'),
+                        duration: Duration(seconds: 2),
+                      ),
+                    );
+                  }
+                },
+                icon: (widget.isBookmarked)
+                    ? Icon(Icons.bookmark_added)
+                    : Icon(Icons.bookmark_add_outlined),
+              )
             ],
           ),
           Text(

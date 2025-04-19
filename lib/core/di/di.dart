@@ -31,7 +31,7 @@ void setupDI() {
 
   // ViewModels
   getIt.registerFactory<NewsViewModel>(
-      () => NewsViewModel(getIt<NewsRepository>()));
+      () => NewsViewModel(getIt<NewsRepository>(), getIt<BookmarksRepository>()));
   getIt.registerFactory<BookmarkViewmodel>(
       () => BookmarkViewmodel(getIt<BookmarksRepository>()));
 }

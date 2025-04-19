@@ -39,8 +39,17 @@ class _BookmarkScreenState extends State<BookmarkScreen> {
             (viewModel.bookmarks?.isNotEmpty == true)
                 ? ListView.builder(
                     itemCount: viewModel.bookmarks?.length,
-                    itemBuilder: (context, index) =>
-                        NewsListItem(news: viewModel.bookmarks?[index]),
+                    itemBuilder: (context, index) {
+                      final news = viewModel.bookmarks?[index];
+                      return NewsListItem(
+                        news: news,
+                        isBookmarked: viewModel.isBookmarked(news),
+                        onBookmarkAdd: () async =>
+                            await viewModel.addToBookmark(news),
+                        onBookmarkRemove: () async =>
+                            await viewModel.removeFromBookmark(news),
+                      );
+                    },
                   )
                 : Center(
                     child: NoItemFoundView(),

@@ -2,8 +2,8 @@ import 'package:go_router/go_router.dart';
 import 'package:kagi_news_app/core/router/route_names.dart';
 import 'package:kagi_news_app/features/bookmarks/views/bookmark_screen.dart';
 import 'package:kagi_news_app/features/dashboard/views/dashboard_screen.dart';
+import 'package:kagi_news_app/features/news_details/data/models/news_details_args.dart';
 import 'package:kagi_news_app/features/news_details/views/news_details_screen.dart';
-import 'package:kagi_news_app/features/news_list/data/model/news/news.dart';
 import 'package:kagi_news_app/features/news_list/views/news_list_screen.dart';
 import 'package:kagi_news_app/features/splash/views/splash_screen.dart';
 
@@ -34,8 +34,8 @@ final appRouter = GoRouter(
       name: RouteNames.details,
       path: "/details",
       builder: (context, state) {
-        final news = state.extra as News;
-        return NewsDetailsScreen(news: news);
+        final extras = state.extra as NewsDetailsArgs;
+        return NewsDetailsScreen(args: extras);
       },
     ),
   ],

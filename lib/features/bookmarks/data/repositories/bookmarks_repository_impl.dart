@@ -16,8 +16,13 @@ class BookmarksRepositoryImpl extends BookmarksRepository {
   List<News>? getAllBookmarkedNews() => _dbService.getAllBookmarkedNews();
 
   @override
-  void removeBookmark(String id) => _dbService.removeBookmark(id);
+  Future<void> removeBookmark(News news) async =>
+      await _dbService.removeBookmark(news);
 
   @override
-  void saveBookmark(News news) => _dbService.saveBookmark(news);
+  Future<void> saveBookmark(News news) async =>
+      await _dbService.saveBookmark(news);
+
+  @override
+  bool isBookmarked(News news) => _dbService.isBookmarked(news);
 }

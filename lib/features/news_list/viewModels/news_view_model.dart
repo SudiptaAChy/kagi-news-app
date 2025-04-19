@@ -1,12 +1,15 @@
 import 'package:flutter/foundation.dart';
+import 'package:kagi_news_app/features/bookmarks/data/repositories/bookmarks_repository.dart';
+import 'package:kagi_news_app/features/news_list/data/model/news/news.dart';
 import 'package:kagi_news_app/features/news_list/data/model/news/news_response.dart';
 import 'package:kagi_news_app/features/news_list/data/model/news_topic/news_topic.dart';
 import 'package:kagi_news_app/features/news_list/data/repositories/news_repository.dart';
 
 class NewsViewModel extends ChangeNotifier {
-  final NewsRepository _repository;
+  final NewsRepository _newsRepository;
+  final BookmarksRepository _bookmarkRepository;
 
-  NewsViewModel(this._repository);
+  NewsViewModel(this._newsRepository, this._bookmarkRepository);
 
   List<NewsTopic>? _topics;
   List<NewsTopic>? get topics => _topics;
@@ -20,10 +23,13 @@ class NewsViewModel extends ChangeNotifier {
   bool _isNewsLoading = false;
   bool get isNewsLoading => _isNewsLoading;
 
+  List<News>? _bookmarks;
+  List<News>? get bookmarks => _bookmarks;
+
   void getNewsTopics() async {
     _isTopicsLoading = true;
 
-    final result = await _repository.fetchNewsTopic();
+    final result = await _newsRepository.fetchNewsTopic();
     _topics = result?.categories;
 
     _isTopicsLoading = false;
@@ -38,10 +44,32 @@ class NewsViewModel extends ChangeNotifier {
 
     _isNewsLoading = true;
 
-    _news = await _repository.fetchNews(file);
+    _news = await _newsRepository.fetchNews(file);
+    _bookmarks = _bookmarkRepository.getAllBookmarkedNews();
 
     _isNewsLoading = false;
 
     notifyListeners();
+  }
+
+  Future<void> addToBookmark(News? news) async {
+    if (news == null) return;
+
+    await _bookmarkRepository.saveBookmark(news);
+
+    notifyListeners();
+  }
+
+  Future<void> removeFromBookmark(News? news) async {
+    if (news == null) return;
+
+    await _bookmarkRepository.removeBookmark(news);
+
+    notifyListeners();
+  }
+
+  bool isBookmarked(News? news) {
+    if (news == null) return false;
+    return _bookmarks?.any((item) => item == news) == true;
   }
 }

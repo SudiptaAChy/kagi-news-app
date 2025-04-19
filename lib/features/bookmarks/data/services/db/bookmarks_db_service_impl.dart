@@ -19,22 +19,29 @@ class BookmarksDbServiceImpl implements BookmarksDbService {
   }
 
   @override
-  void removeBookmark(String id) {
+  Future<void> removeBookmark(News news) async {
     final allBookmarks = _dbService.getAll(_bookmarks);
     for (int index = 0; index < allBookmarks.length; index++) {
-      if (allBookmarks[index].uid == id) {
-        _dbService.deleteAt(_bookmarks, index);
+      if (allBookmarks[index] == news) {
+        await _dbService.deleteAt(_bookmarks, index);
         break;
       }
     }
   }
 
   @override
-  void saveBookmark(News news) {
+  Future<void> saveBookmark(News news) async {
     final isExists =
-        _dbService.getAll(_bookmarks).any((item) => item.uid == news.uid);
+        _dbService.getAll(_bookmarks).any((item) => item == news);
     if (!isExists) {
-      _dbService.add(_bookmarks, news);
+      await _dbService.add(_bookmarks, news);
     }
+  }
+
+  @override
+  bool isBookmarked(News news) {
+    final isExists =
+        _dbService.getAll(_bookmarks).any((item) => item == news);
+    return isExists;
   }
 }

@@ -4,7 +4,6 @@ import 'package:hive/hive.dart';
 import 'package:kagi_news_app/features/news_list/data/model/news/perspective.dart';
 import 'package:kagi_news_app/features/news_list/data/model/news/article.dart';
 import 'package:kagi_news_app/features/news_list/data/model/news/domain.dart';
-import 'package:uuid/uuid.dart';
 
 part 'news.g.dart';
 
@@ -133,8 +132,8 @@ class News extends HiveObject {
   @HiveField(40)
   List<Domain>? domains;
 
-  @HiveField(41)
-  String? uid = const Uuid().v4();
+  // @HiveField(41)
+  // String? uid = const Uuid().v4();
 
   News({
     this.clusterNumber,
@@ -185,92 +184,151 @@ class News extends HiveObject {
   String toRawJson() => json.encode(toJson());
 
   factory News.fromJson(Map<String, dynamic> json) => News(
-    clusterNumber: json["cluster_number"],
-    uniqueDomains: json["unique_domains"],
-    numberOfTitles: json["number_of_titles"],
-    category: json["category"],
-    title: json["title"],
-    shortSummary: json["short_summary"],
-    didYouKnow: json["did_you_know"],
-    talkingPoints: json["talking_points"] == null ? [] : List<String>.from(json["talking_points"]!.map((x) => x)),
-    quote: json["quote"],
-    quoteAuthor: json["quote_author"],
-    quoteSourceUrl: json["quote_source_url"],
-    quoteSourceDomain: json["quote_source_domain"],
-    location: json["location"],
-    perspectives: json["perspectives"] == null ? [] : List<Perspective>.from(json["perspectives"]!.map((x) => Perspective.fromJson(x))),
-    emoji: json["emoji"],
-    geopoliticalContext: json["geopolitical_context"],
-    historicalBackground: json["historical_background"],
-    internationalReactions: parseStringList(json["international_reactions"]),
-    humanitarianImpact: json["humanitarian_impact"],
-    economicImplications: json["economic_implications"],
-    timeline: parseStringList(json["timeline"]),
-    futureOutlook: json["future_outlook"],
-    keyPlayers: json["key_players"] == null ? [] : List<dynamic>.from(json["key_players"]!.map((x) => x)),
-    technicalDetails: parseStringList(json["technical_details"]),
-    businessAngleText: json["business_angle_text"],
-    businessAnglePoints: json["business_angle_points"] == null ? [] : List<String>.from(json["business_angle_points"]!.map((x) => x)),
-    userActionItems: parseStringList(json["user_action_items"]),
-    scientificSignificance: json["scientific_significance"] == null ? [] : List<String>.from(json["scientific_significance"]!.map((x) => x)),
-    travelAdvisory: parseStringList(json["travel_advisory"]),
-    destinationHighlights: json["destination_highlights"],
-    culinarySignificance: json["culinary_significance"],
-    performanceStatistics: parseStringList(json["performance_statistics"]),
-    leagueStandings: json["league_standings"],
-    diyTips: json["diy_tips"],
-    designPrinciples: json["design_principles"],
-    userExperienceImpact: parseStringList(json["user_experience_impact"]),
-    gameplayMechanics: parseStringList(json["gameplay_mechanics"]),
-    industryImpact: json["industry_impact"] == null ? [] : List<String>.from(json["industry_impact"]!.map((x) => x)),
-    technicalSpecifications: json["technical_specifications"],
-    articles: json["articles"] == null ? [] : List<Article>.from(json["articles"]!.map((x) => Article.fromJson(x))),
-    domains: json["domains"] == null ? [] : List<Domain>.from(json["domains"]!.map((x) => Domain.fromJson(x))),
-  );
+        clusterNumber: json["cluster_number"],
+        uniqueDomains: json["unique_domains"],
+        numberOfTitles: json["number_of_titles"],
+        category: json["category"],
+        title: json["title"],
+        shortSummary: json["short_summary"],
+        didYouKnow: json["did_you_know"],
+        talkingPoints: json["talking_points"] == null
+            ? []
+            : List<String>.from(json["talking_points"]!.map((x) => x)),
+        quote: json["quote"],
+        quoteAuthor: json["quote_author"],
+        quoteSourceUrl: json["quote_source_url"],
+        quoteSourceDomain: json["quote_source_domain"],
+        location: json["location"],
+        perspectives: json["perspectives"] == null
+            ? []
+            : List<Perspective>.from(
+                json["perspectives"]!.map((x) => Perspective.fromJson(x))),
+        emoji: json["emoji"],
+        geopoliticalContext: json["geopolitical_context"],
+        historicalBackground: json["historical_background"],
+        internationalReactions:
+            parseStringList(json["international_reactions"]),
+        humanitarianImpact: json["humanitarian_impact"],
+        economicImplications: json["economic_implications"],
+        timeline: parseStringList(json["timeline"]),
+        futureOutlook: json["future_outlook"],
+        keyPlayers: json["key_players"] == null
+            ? []
+            : List<dynamic>.from(json["key_players"]!.map((x) => x)),
+        technicalDetails: parseStringList(json["technical_details"]),
+        businessAngleText: json["business_angle_text"],
+        businessAnglePoints: json["business_angle_points"] == null
+            ? []
+            : List<String>.from(json["business_angle_points"]!.map((x) => x)),
+        userActionItems: parseStringList(json["user_action_items"]),
+        scientificSignificance: json["scientific_significance"] == null
+            ? []
+            : List<String>.from(json["scientific_significance"]!.map((x) => x)),
+        travelAdvisory: parseStringList(json["travel_advisory"]),
+        destinationHighlights: json["destination_highlights"],
+        culinarySignificance: json["culinary_significance"],
+        performanceStatistics: parseStringList(json["performance_statistics"]),
+        leagueStandings: json["league_standings"],
+        diyTips: json["diy_tips"],
+        designPrinciples: json["design_principles"],
+        userExperienceImpact: parseStringList(json["user_experience_impact"]),
+        gameplayMechanics: parseStringList(json["gameplay_mechanics"]),
+        industryImpact: json["industry_impact"] == null
+            ? []
+            : List<String>.from(json["industry_impact"]!.map((x) => x)),
+        technicalSpecifications: json["technical_specifications"],
+        articles: json["articles"] == null
+            ? []
+            : List<Article>.from(
+                json["articles"]!.map((x) => Article.fromJson(x))),
+        domains: json["domains"] == null
+            ? []
+            : List<Domain>.from(
+                json["domains"]!.map((x) => Domain.fromJson(x))),
+      );
 
   Map<String, dynamic> toJson() => {
-    "cluster_number": clusterNumber,
-    "unique_domains": uniqueDomains,
-    "number_of_titles": numberOfTitles,
-    "category": category,
-    "title": title,
-    "short_summary": shortSummary,
-    "did_you_know": didYouKnow,
-    "talking_points": talkingPoints == null ? [] : List<dynamic>.from(talkingPoints!.map((x) => x)),
-    "quote": quote,
-    "quote_author": quoteAuthor,
-    "quote_source_url": quoteSourceUrl,
-    "quote_source_domain": quoteSourceDomain,
-    "location": location,
-    "perspectives": perspectives == null ? [] : List<dynamic>.from(perspectives!.map((x) => x.toJson())),
-    "emoji": emoji,
-    "geopolitical_context": geopoliticalContext,
-    "historical_background": historicalBackground,
-    "international_reactions": internationalReactions,
-    "humanitarian_impact": humanitarianImpact,
-    "economic_implications": economicImplications,
-    "timeline": timeline,
-    "future_outlook": futureOutlook,
-    "key_players": keyPlayers == null ? [] : List<dynamic>.from(keyPlayers!.map((x) => x)),
-    "technical_details": technicalDetails,
-    "business_angle_text": businessAngleText,
-    "business_angle_points": businessAnglePoints == null ? [] : List<dynamic>.from(businessAnglePoints!.map((x) => x)),
-    "user_action_items": userActionItems,
-    "scientific_significance": scientificSignificance == null ? [] : List<dynamic>.from(scientificSignificance!.map((x) => x)),
-    "travel_advisory": travelAdvisory == null ? [] : List<dynamic>.from(travelAdvisory!.map((x) => x)),
-    "destination_highlights": destinationHighlights,
-    "culinary_significance": culinarySignificance,
-    "performance_statistics": performanceStatistics == null ? [] : List<dynamic>.from(performanceStatistics!.map((x) => x)),
-    "league_standings": leagueStandings,
-    "diy_tips": diyTips,
-    "design_principles": designPrinciples,
-    "user_experience_impact": userExperienceImpact,
-    "gameplay_mechanics": gameplayMechanics == null ? [] : List<dynamic>.from(gameplayMechanics!.map((x) => x)),
-    "industry_impact": industryImpact == null ? [] : List<dynamic>.from(industryImpact!.map((x) => x)),
-    "technical_specifications": technicalSpecifications,
-    "articles": articles == null ? [] : List<dynamic>.from(articles!.map((x) => x.toJson())),
-    "domains": domains == null ? [] : List<dynamic>.from(domains!.map((x) => x.toJson())),
-  };
+        "cluster_number": clusterNumber,
+        "unique_domains": uniqueDomains,
+        "number_of_titles": numberOfTitles,
+        "category": category,
+        "title": title,
+        "short_summary": shortSummary,
+        "did_you_know": didYouKnow,
+        "talking_points": talkingPoints == null
+            ? []
+            : List<dynamic>.from(talkingPoints!.map((x) => x)),
+        "quote": quote,
+        "quote_author": quoteAuthor,
+        "quote_source_url": quoteSourceUrl,
+        "quote_source_domain": quoteSourceDomain,
+        "location": location,
+        "perspectives": perspectives == null
+            ? []
+            : List<dynamic>.from(perspectives!.map((x) => x.toJson())),
+        "emoji": emoji,
+        "geopolitical_context": geopoliticalContext,
+        "historical_background": historicalBackground,
+        "international_reactions": internationalReactions,
+        "humanitarian_impact": humanitarianImpact,
+        "economic_implications": economicImplications,
+        "timeline": timeline,
+        "future_outlook": futureOutlook,
+        "key_players": keyPlayers == null
+            ? []
+            : List<dynamic>.from(keyPlayers!.map((x) => x)),
+        "technical_details": technicalDetails,
+        "business_angle_text": businessAngleText,
+        "business_angle_points": businessAnglePoints == null
+            ? []
+            : List<dynamic>.from(businessAnglePoints!.map((x) => x)),
+        "user_action_items": userActionItems,
+        "scientific_significance": scientificSignificance == null
+            ? []
+            : List<dynamic>.from(scientificSignificance!.map((x) => x)),
+        "travel_advisory": travelAdvisory == null
+            ? []
+            : List<dynamic>.from(travelAdvisory!.map((x) => x)),
+        "destination_highlights": destinationHighlights,
+        "culinary_significance": culinarySignificance,
+        "performance_statistics": performanceStatistics == null
+            ? []
+            : List<dynamic>.from(performanceStatistics!.map((x) => x)),
+        "league_standings": leagueStandings,
+        "diy_tips": diyTips,
+        "design_principles": designPrinciples,
+        "user_experience_impact": userExperienceImpact,
+        "gameplay_mechanics": gameplayMechanics == null
+            ? []
+            : List<dynamic>.from(gameplayMechanics!.map((x) => x)),
+        "industry_impact": industryImpact == null
+            ? []
+            : List<dynamic>.from(industryImpact!.map((x) => x)),
+        "technical_specifications": technicalSpecifications,
+        "articles": articles == null
+            ? []
+            : List<dynamic>.from(articles!.map((x) => x.toJson())),
+        "domains": domains == null
+            ? []
+            : List<dynamic>.from(domains!.map((x) => x.toJson())),
+      };
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    if (other is News) {
+      return title == other.title &&
+          category == other.category &&
+          shortSummary == other.shortSummary;
+    }
+
+    return false;
+  }
+
+  @override
+  int get hashCode =>
+      title.hashCode ^ category.hashCode ^ shortSummary.hashCode;
 }
 
 List<String>? parseStringList(dynamic value) {
@@ -282,4 +340,3 @@ List<String>? parseStringList(dynamic value) {
 
   return [];
 }
-

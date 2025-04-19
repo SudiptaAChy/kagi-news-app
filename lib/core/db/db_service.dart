@@ -1,12 +1,12 @@
 import 'package:hive_flutter/adapters.dart';
-import 'package:kagi_news_app/features/news_list/data/model/news/article.dart';
-import 'package:kagi_news_app/features/news_list/data/model/news/domain.dart';
-import 'package:kagi_news_app/features/news_list/data/model/news/news.dart';
-import 'package:kagi_news_app/features/news_list/data/model/news/news_response.dart';
-import 'package:kagi_news_app/features/news_list/data/model/news/perspective.dart';
-import 'package:kagi_news_app/features/news_list/data/model/news/source.dart';
-import 'package:kagi_news_app/features/news_list/data/model/news_topic/news_topic.dart';
-import 'package:kagi_news_app/features/news_list/data/model/news_topic/news_topic_response.dart';
+import 'package:kagi_news_app/features/news_list/data/models/news/article.dart';
+import 'package:kagi_news_app/features/news_list/data/models/news/domain.dart';
+import 'package:kagi_news_app/features/news_list/data/models/news/news.dart';
+import 'package:kagi_news_app/features/news_list/data/models/news/news_response.dart';
+import 'package:kagi_news_app/features/news_list/data/models/news/perspective.dart';
+import 'package:kagi_news_app/features/news_list/data/models/news/source.dart';
+import 'package:kagi_news_app/features/news_list/data/models/news_topic/news_topic.dart';
+import 'package:kagi_news_app/features/news_list/data/models/news_topic/news_topic_response.dart';
 
 class DbService {
   static final instance = DbService._();

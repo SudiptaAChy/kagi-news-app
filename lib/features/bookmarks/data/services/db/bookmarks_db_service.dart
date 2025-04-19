@@ -1,4 +1,4 @@
-import 'package:kagi_news_app/features/news_list/data/model/news/news.dart';
+import 'package:kagi_news_app/features/news_list/data/models/news/news.dart';
 
 abstract class BookmarksDbService {
   List<News>? getAllBookmarkedNews();

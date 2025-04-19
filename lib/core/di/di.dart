@@ -3,14 +3,14 @@ import 'package:kagi_news_app/features/bookmarks/data/repositories/bookmarks_rep
 import 'package:kagi_news_app/features/bookmarks/data/repositories/bookmarks_repository_impl.dart';
 import 'package:kagi_news_app/features/bookmarks/data/services/db/bookmarks_db_service.dart';
 import 'package:kagi_news_app/features/bookmarks/data/services/db/bookmarks_db_service_impl.dart';
-import 'package:kagi_news_app/features/bookmarks/viewModels/bookmark_viewmodel.dart';
+import 'package:kagi_news_app/features/bookmarks/view_models/bookmark_viewmodel.dart';
 import 'package:kagi_news_app/features/news_list/data/repositories/news_repository.dart';
 import 'package:kagi_news_app/features/news_list/data/repositories/news_repository_impl.dart';
 import 'package:kagi_news_app/features/news_list/data/services/api/news_api_service.dart';
 import 'package:kagi_news_app/features/news_list/data/services/api/news_api_service_impl.dart';
 import 'package:kagi_news_app/features/news_list/data/services/db/news_db_service.dart';
 import 'package:kagi_news_app/features/news_list/data/services/db/news_db_service_impl.dart';
-import 'package:kagi_news_app/features/news_list/viewModels/news_view_model.dart';
+import 'package:kagi_news_app/features/news_list/view_models/news_view_model.dart';
 
 final getIt = GetIt.instance;
 

@@ -1,6 +1,6 @@
 import 'package:kagi_news_app/features/bookmarks/data/repositories/bookmarks_repository.dart';
 import 'package:kagi_news_app/features/bookmarks/data/services/db/bookmarks_db_service.dart';
-import 'package:kagi_news_app/features/news_list/data/model/news/news.dart';
+import 'package:kagi_news_app/features/news_list/data/models/news/news.dart';
 
 class BookmarksRepositoryImpl extends BookmarksRepository {
   final BookmarksDbService _dbService;

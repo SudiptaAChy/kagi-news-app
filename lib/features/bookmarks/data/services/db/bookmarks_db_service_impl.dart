@@ -1,7 +1,7 @@
 import 'package:kagi_news_app/core/db/db_service.dart';
 import 'package:kagi_news_app/core/db/hive_boxes.dart';
 import 'package:kagi_news_app/features/bookmarks/data/services/db/bookmarks_db_service.dart';
-import 'package:kagi_news_app/features/news_list/data/model/news/news.dart';
+import 'package:kagi_news_app/features/news_list/data/models/news/news.dart';
 
 class BookmarksDbServiceImpl implements BookmarksDbService {
   final _dbService = DbService.instance;

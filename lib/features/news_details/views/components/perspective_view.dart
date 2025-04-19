@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kagi_news_app/core/constants/pallete.dart';
 import 'package:kagi_news_app/core/constants/strings.dart';
-import 'package:kagi_news_app/features/news_list/data/model/news/perspective.dart';
+import 'package:kagi_news_app/features/news_list/data/models/news/perspective.dart';
 
 class PerspectiveView extends StatelessWidget {
   final List<Perspective> perspectives;

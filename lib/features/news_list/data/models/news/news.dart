@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:hive/hive.dart';
-import 'package:kagi_news_app/features/news_list/data/model/news/perspective.dart';
-import 'package:kagi_news_app/features/news_list/data/model/news/article.dart';
-import 'package:kagi_news_app/features/news_list/data/model/news/domain.dart';
+import 'package:kagi_news_app/features/news_list/data/models/news/perspective.dart';
+import 'package:kagi_news_app/features/news_list/data/models/news/article.dart';
+import 'package:kagi_news_app/features/news_list/data/models/news/domain.dart';
 
 part 'news.g.dart';
 

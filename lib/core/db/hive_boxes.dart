@@ -1,8 +1,8 @@
 import 'package:hive/hive.dart';
-import 'package:kagi_news_app/features/news_list/data/model/news/news.dart';
-import 'package:kagi_news_app/features/news_list/data/model/news/news_response.dart';
+import 'package:kagi_news_app/features/news_list/data/models/news/news.dart';
+import 'package:kagi_news_app/features/news_list/data/models/news/news_response.dart';
 
-import '../../features/news_list/data/model/news_topic/news_topic_response.dart';
+import '../../features/news_list/data/models/news_topic/news_topic_response.dart';
 
 class HiveBoxes {
   HiveBoxes._();

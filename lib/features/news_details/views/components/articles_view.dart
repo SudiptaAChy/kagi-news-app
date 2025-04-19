@@ -2,8 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:kagi_news_app/core/constants/strings.dart';
 import 'package:kagi_news_app/core/utils/date_time_helper.dart';
-import 'package:kagi_news_app/features/news_list/data/model/news/article.dart';
-import 'package:kagi_news_app/features/news_list/data/model/news/domain.dart';
+import 'package:kagi_news_app/features/news_list/data/models/news/article.dart';
+import 'package:kagi_news_app/features/news_list/data/models/news/domain.dart';
 
 class ArticlesView extends StatelessWidget {
   final List<Article> articles;

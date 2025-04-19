@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:kagi_news_app/core/router/route_names.dart';
 import 'package:kagi_news_app/core/views/custom_tab_bar.dart';
 import 'package:kagi_news_app/features/news_details/data/models/news_details_args.dart';
-import 'package:kagi_news_app/features/news_list/viewModels/news_view_model.dart';
+import 'package:kagi_news_app/features/news_list/view_models/news_view_model.dart';
 import 'package:kagi_news_app/features/news_list/views/components/news_list_item.dart';
 import 'package:provider/provider.dart';
 

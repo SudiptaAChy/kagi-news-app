@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kagi_news_app/core/views/cached_network_image_view.dart';
 import 'package:kagi_news_app/core/views/custom_chip_box.dart';
-import 'package:kagi_news_app/features/news_list/data/model/news/news.dart';
+import 'package:kagi_news_app/features/news_list/data/models/news/news.dart';
 
 class NewsListItem extends StatelessWidget {
   final News? news;

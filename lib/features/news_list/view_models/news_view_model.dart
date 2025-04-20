@@ -40,7 +40,11 @@ class NewsViewModel extends ChangeNotifier {
   }
 
   void getNews(String? file) async {
-    if (file == null) return;
+    if (file == null) {
+      _news = null;
+      _bookmarks = null;
+      return;
+    }
 
     _isNewsLoading = true;
 

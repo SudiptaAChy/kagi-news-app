@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kagi_news_app/core/router/route_names.dart';
 import 'package:kagi_news_app/core/views/custom_tab_bar.dart';
+import 'package:kagi_news_app/core/views/no_item_found_view.dart';
 import 'package:kagi_news_app/features/news_details/data/models/news_details_args.dart';
 import 'package:kagi_news_app/features/news_list/view_models/news_view_model.dart';
 import 'package:kagi_news_app/features/news_list/views/components/news_list_item.dart';
@@ -57,32 +58,37 @@ class _NewsListScreenState extends State<NewsListScreen>
             (viewModel.isNewsLoading)
                 ? showLoader()
                 : Expanded(
-                    child: ListView.separated(
-                      itemCount: viewModel.news?.news?.length ?? 0,
-                      itemBuilder: (context, index) {
-                        final news = viewModel.news?.news?[index];
-                        final isBookmarked = viewModel.isBookmarked(news);
+                    child: (viewModel.news == null ||
+                            viewModel.news?.news?.isEmpty == true)
+                        ? NoItemFoundView()
+                        : ListView.separated(
+                            itemCount: viewModel.news?.news?.length ?? 0,
+                            itemBuilder: (context, index) {
+                              final news = viewModel.news?.news?[index];
+                              final isBookmarked = viewModel.isBookmarked(news);
 
-                        return InkWell(
-                          onTap: () => context.pushNamed(
-                            RouteNames.details,
-                            extra: NewsDetailsArgs(
-                              news!,
-                              isBookmarked,
-                              () => viewModel.addToBookmark(news),
-                              () => viewModel.removeFromBookmark(news),
-                            ),
+                              return InkWell(
+                                onTap: () => context.pushNamed(
+                                  RouteNames.details,
+                                  extra: NewsDetailsArgs(
+                                    news!,
+                                    isBookmarked,
+                                    () => viewModel.addToBookmark(news),
+                                    () => viewModel.removeFromBookmark(news),
+                                  ),
+                                ),
+                                child: NewsListItem(
+                                  news: news,
+                                  isBookmarked: isBookmarked,
+                                  onBookmarkAdd: () async =>
+                                      await viewModel.addToBookmark(news),
+                                  onBookmarkRemove: () async =>
+                                      await viewModel.removeFromBookmark(news),
+                                ),
+                              );
+                            },
+                            separatorBuilder: (context, index) => Divider(),
                           ),
-                          child: NewsListItem(
-                            news: news,
-                            isBookmarked: isBookmarked,
-                            onBookmarkAdd: () async => await viewModel.addToBookmark(news),
-                            onBookmarkRemove: () async => await viewModel.removeFromBookmark(news),
-                          ),
-                        );
-                      },
-                      separatorBuilder: (context, index) => Divider(),
-                    ),
                   ),
           ],
         );

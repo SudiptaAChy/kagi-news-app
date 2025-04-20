@@ -10,7 +10,10 @@ class NewsDBServiceImpl implements NewsDbService {
   final _newsBox = HiveBoxes.news;
 
   @override
-  NewsTopicResponse? getNewsTopics() => _dbService.getAt(_newsTopicBox, 0);
+  NewsTopicResponse? getNewsTopics() {
+    final data = _dbService.getAll(_newsTopicBox);
+    return (data.isEmpty == true) ? null : data[0];
+  }
 
   @override
   Future<void> saveNewsTopics(NewsTopicResponse data) async {

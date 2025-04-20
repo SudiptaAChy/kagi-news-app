@@ -21,13 +21,14 @@ class NewsResponseAdapter extends TypeAdapter<NewsResponse> {
       timestamp: fields[1] as int?,
       read: fields[2] as int?,
       news: (fields[3] as List?)?.cast<News>(),
+      events: (fields[4] as List?)?.cast<Event>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, NewsResponse obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.category)
       ..writeByte(1)
@@ -35,7 +36,9 @@ class NewsResponseAdapter extends TypeAdapter<NewsResponse> {
       ..writeByte(2)
       ..write(obj.read)
       ..writeByte(3)
-      ..write(obj.news);
+      ..write(obj.news)
+      ..writeByte(4)
+      ..write(obj.events);
   }
 
   @override

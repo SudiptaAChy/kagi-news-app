@@ -49,7 +49,7 @@ class NewsViewModel extends ChangeNotifier {
     _isNewsLoading = true;
 
     _news = await _newsRepository.fetchNews(file);
-    _bookmarks = _bookmarkRepository.getAllBookmarkedNews();
+    if (file != "onthisday.json") _bookmarks = _bookmarkRepository.getAllBookmarkedNews();
 
     _isNewsLoading = false;
 

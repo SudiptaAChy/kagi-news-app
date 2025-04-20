@@ -28,4 +28,6 @@ class Strings {
   static const performanceStatistics = "Performance statistics";
   static const leagueStandings = "League standings";
   static const nothingFound = "No item found!";
+  static const events = "Events";
+  static const people = "People";
 }

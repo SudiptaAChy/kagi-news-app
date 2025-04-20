@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kagi_news_app/core/constants/pallete.dart';
 import 'package:kagi_news_app/core/constants/strings.dart';
+import 'package:kagi_news_app/core/utils/url_launcher_utils.dart';
 import 'package:kagi_news_app/core/views/cached_network_image_view.dart';
 import 'package:kagi_news_app/core/views/custom_chip_box.dart';
 import 'package:kagi_news_app/features/news_details/views/components/articles_view.dart';
@@ -15,7 +16,6 @@ import 'package:kagi_news_app/features/news_details/views/components/plain_infor
 import 'package:kagi_news_app/features/news_details/views/components/quotes_view.dart';
 import 'package:kagi_news_app/features/news_details/views/components/timeline_view.dart';
 import 'package:kagi_news_app/features/news_details/data/models/news_details_args.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class NewsDetailsScreen extends StatelessWidget {
   final NewsDetailsArgs args;
@@ -267,15 +267,11 @@ class NewsDetailsScreen extends StatelessWidget {
   }
 
   Future<void> _launchUrl(String? url, BuildContext context) async {
-    if (url == null || url.isEmpty) return;
-
-    final uri = Uri.tryParse(url);
-
-    if (uri == null) return;
-
-    if (!await launchUrl(uri)) {
+    try {
+      launchURL(url);
+    } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text("Not found any supported web browser!"),
+        content: Text(e.toString()),
         duration: Duration(seconds: 2),
       ));
     }

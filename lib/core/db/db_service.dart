@@ -1,6 +1,7 @@
 import 'package:hive_flutter/adapters.dart';
 import 'package:kagi_news_app/features/news_list/data/models/news/article.dart';
 import 'package:kagi_news_app/features/news_list/data/models/news/domain.dart';
+import 'package:kagi_news_app/features/news_list/data/models/news/event.dart';
 import 'package:kagi_news_app/features/news_list/data/models/news/news.dart';
 import 'package:kagi_news_app/features/news_list/data/models/news/news_response.dart';
 import 'package:kagi_news_app/features/news_list/data/models/news/perspective.dart';
@@ -25,6 +26,8 @@ class DbService {
     Hive.registerAdapter(NewsResponseAdapter());
     Hive.registerAdapter(PerspectiveAdapter());
     Hive.registerAdapter(SourceAdapter());
+    Hive.registerAdapter(EventAdapter());
+    Hive.registerAdapter(EventTypeAdapter());
   }
 
   List<T> getAll<T>(Box<T> box) => box.values.toList();

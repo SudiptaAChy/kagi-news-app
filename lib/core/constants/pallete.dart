@@ -5,7 +5,7 @@ class Pallete {
 
   static const primaryColor = Color(0xffffb319);
 
-  static const navBarBgColor = Color(0xfffff3e0);
+  static final navBarBgColor = Colors.grey[300];
   static const navItemActiveColor = Colors.black;
   static const navItemInactiveColor = Colors.grey;
   static final cardBg = Colors.grey[50];

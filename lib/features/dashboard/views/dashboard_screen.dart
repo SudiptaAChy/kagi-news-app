@@ -24,7 +24,7 @@ class DashboardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(child: child),
-      bottomNavigationBar: bottomNavBar(context),
+      bottomNavigationBar: SafeArea(child: bottomNavBar(context)),
     );
   }
 

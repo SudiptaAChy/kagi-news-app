@@ -28,12 +28,12 @@ class NewsViewModel extends ChangeNotifier {
 
   void getNewsTopics() async {
     _isTopicsLoading = true;
+    notifyListeners();
 
     final result = await _newsRepository.fetchNewsTopic();
     _topics = result?.categories;
 
     _isTopicsLoading = false;
-
     notifyListeners();
 
     getNews(_topics?[0].file);
@@ -47,12 +47,12 @@ class NewsViewModel extends ChangeNotifier {
     }
 
     _isNewsLoading = true;
+    notifyListeners();
 
     _news = await _newsRepository.fetchNews(file);
     if (file != "onthisday.json") _bookmarks = _bookmarkRepository.getAllBookmarkedNews();
 
     _isNewsLoading = false;
-
     notifyListeners();
   }
 

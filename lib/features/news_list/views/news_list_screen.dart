@@ -36,29 +36,32 @@ class _NewsListScreenState extends State<NewsListScreen> {
                 .toList() ??
             [];
 
-        return Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: (viewModel.isTopicsLoading)
-                  ? showLoader()
-                  : CustomTabBar(
-                      items: topicNames,
-                      onTabChanged: (index) {
-                        viewModel.getNews(viewModel.topics?[index].file);
-                      },
-                    ),
-            ),
-            Expanded(
-              child: (viewModel.isNewsLoading)
-                  ? Center(child: showLoader())
-                  : (viewModel.news == null)
-                      ? NoItemFoundView()
-                      : (viewModel.news?.events?.isEmpty == true)
-                          ? showNewsItems(viewModel)
-                          : showEventsItems(viewModel),
-            )
-          ],
+        return Container(
+          color: Colors.white,
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: (viewModel.isTopicsLoading)
+                    ? showLoader()
+                    : CustomTabBar(
+                        items: topicNames,
+                        onTabChanged: (index) {
+                          viewModel.getNews(viewModel.topics?[index].file);
+                        },
+                      ),
+              ),
+              Expanded(
+                child: (viewModel.isNewsLoading)
+                    ? Center(child: showLoader())
+                    : (viewModel.news == null)
+                        ? NoItemFoundView()
+                        : (viewModel.news?.events?.isEmpty == true)
+                            ? showNewsItems(viewModel)
+                            : showEventsItems(viewModel),
+              )
+            ],
+          ),
         );
       },
     );

@@ -4,7 +4,7 @@ import 'package:kagi_news_app/core/db/db_service.dart';
 import 'package:kagi_news_app/core/db/hive_boxes.dart';
 import 'package:kagi_news_app/core/di/di.dart';
 import 'package:kagi_news_app/core/router/app_router.dart';
-import 'package:kagi_news_app/features/bookmarks/view_models/bookmark_viewmodel.dart';
+import 'package:kagi_news_app/features/bookmarks/view_models/bookmark_view_model.dart';
 import 'package:kagi_news_app/features/news_list/view_models/news_view_model.dart';
 import 'package:provider/provider.dart';
 

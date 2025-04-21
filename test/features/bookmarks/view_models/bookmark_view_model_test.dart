@@ -1,10 +1,10 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:kagi_news_app/features/bookmarks/view_models/bookmark_viewmodel.dart';
+import 'package:kagi_news_app/features/bookmarks/view_models/bookmark_view_model.dart';
 import 'package:kagi_news_app/features/news_list/data/models/news/news.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../news_list/mock/news_view_model_test.mocks.dart';
-import '../mock/mock_bookmark_viewmodel_data_helper.dart';
+import '../mock/mock_bookmark_view_model_data_helper.dart';
 
 void main() {
   late MockBookmarksRepository mockBookmarksRepository;

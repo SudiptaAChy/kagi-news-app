@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kagi_news_app/core/views/no_item_found_view.dart';
-import 'package:kagi_news_app/features/bookmarks/view_models/bookmark_viewmodel.dart';
+import 'package:kagi_news_app/features/bookmarks/view_models/bookmark_view_model.dart';
 import 'package:kagi_news_app/features/news_list/views/components/news_list_item.dart';
 import 'package:provider/provider.dart';
 

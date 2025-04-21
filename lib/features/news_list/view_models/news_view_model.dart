@@ -23,10 +23,7 @@ class NewsViewModel extends ChangeNotifier {
   bool _isNewsLoading = true;
   bool get isNewsLoading => _isNewsLoading;
 
-  List<News>? _bookmarks;
-  List<News>? get bookmarks => _bookmarks;
-
-  void getNewsTopics() async {
+  Future<void> getNewsTopics() async {
     _isTopicsLoading = true;
     notifyListeners();
 
@@ -36,13 +33,12 @@ class NewsViewModel extends ChangeNotifier {
     _isTopicsLoading = false;
     notifyListeners();
 
-    getNews(_topics?[0].file);
+    await getNews(_topics?[0].file);
   }
 
-  void getNews(String? file) async {
+  Future<void> getNews(String? file) async {
     if (file == null) {
       _news = null;
-      _bookmarks = null;
       return;
     }
 
@@ -50,7 +46,6 @@ class NewsViewModel extends ChangeNotifier {
     notifyListeners();
 
     _news = await _newsRepository.fetchNews(file);
-    if (file != "onthisday.json") _bookmarks = _bookmarkRepository.getAllBookmarkedNews();
 
     _isNewsLoading = false;
     notifyListeners();

@@ -49,15 +49,15 @@ class _NewsListScreenState extends State<NewsListScreen> {
                       },
                     ),
             ),
-            (viewModel.isNewsLoading)
-                ? showLoader()
-                : Expanded(
-                    child: (viewModel.news == null)
-                        ? NoItemFoundView()
-                        : (viewModel.news?.events?.isEmpty == true)
-                            ? showNewsItems(viewModel)
-                            : showEventsItems(viewModel),
-                  ),
+            Expanded(
+              child: (viewModel.isNewsLoading)
+                  ? Center(child: showLoader())
+                  : (viewModel.news == null)
+                      ? NoItemFoundView()
+                      : (viewModel.news?.events?.isEmpty == true)
+                          ? showNewsItems(viewModel)
+                          : showEventsItems(viewModel),
+            )
           ],
         );
       },

@@ -14,13 +14,13 @@ class NewsViewModel extends ChangeNotifier {
   List<NewsTopic>? _topics;
   List<NewsTopic>? get topics => _topics;
 
-  bool _isTopicsLoading = false;
+  bool _isTopicsLoading = true;
   bool get isTopicsLoading => _isTopicsLoading;
 
   NewsResponse? _news;
   NewsResponse? get news => _news;
 
-  bool _isNewsLoading = false;
+  bool _isNewsLoading = true;
   bool get isNewsLoading => _isNewsLoading;
 
   List<News>? _bookmarks;

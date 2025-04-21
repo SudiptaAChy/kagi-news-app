@@ -7,7 +7,7 @@ import 'package:kagi_news_app/features/news_list/view_models/news_view_model.dar
 import 'package:kagi_news_app/features/bookmarks/data/repositories/bookmarks_repository.dart';
 import 'package:kagi_news_app/features/news_list/data/repositories/news_repository.dart';
 
-import '../mock/mock_data_helper.dart';
+import '../mock/mock_news_view_model_data_helper.dart';
 import '../mock/news_view_model_test.mocks.dart';
 
 @GenerateMocks([NewsRepository, BookmarksRepository])
@@ -15,16 +15,19 @@ void main() {
   late MockNewsRepository mockNewsRepository;
   late MockBookmarksRepository mockBookmarksRepository;
   late NewsViewModel viewModel;
+  MockNewsViewModelDataHelper? dataHelper;
 
   setUp(() {
     mockNewsRepository = MockNewsRepository();
     mockBookmarksRepository = MockBookmarksRepository();
     viewModel = NewsViewModel(mockNewsRepository, mockBookmarksRepository);
+    dataHelper = MockNewsViewModelDataHelper();
   });
 
   tearDown(() {
     resetMockitoState();
     viewModel.dispose();
+    dataHelper = null;
   });
 
   group("NewsViewModel test", () {
@@ -33,9 +36,9 @@ void main() {
           "should update topics and fetch news when topic fetch is successfull",
           () async {
         when(mockNewsRepository.fetchNewsTopic())
-            .thenAnswer((_) async => mockNewsTopicResponse);
+            .thenAnswer((_) async => dataHelper?.mockNewsTopicResponse);
         when(mockNewsRepository.fetchNews(any))
-            .thenAnswer((_) async => mockNewsResponse);
+            .thenAnswer((_) async => dataHelper?.mockNewsResponse);
         when(mockBookmarksRepository.getAllBookmarkedNews()).thenReturn([]);
 
         await viewModel.getNewsTopics();
@@ -78,9 +81,9 @@ void main() {
       test("should update news when file is anything except onthisday.json",
           () async {
         when(mockNewsRepository.fetchNews(any))
-            .thenAnswer((_) async => mockNewsResponse);
+            .thenAnswer((_) async => dataHelper?.mockNewsResponse);
         when(mockBookmarksRepository.getAllBookmarkedNews())
-            .thenReturn(mockBookmarkResponse);
+            .thenReturn(dataHelper?.mockBookmarkResponse);
 
         await viewModel.getNews("world.json");
 
@@ -134,7 +137,7 @@ void main() {
 
       test("should return false when news is not present in bookmarks", () {
         when(mockBookmarksRepository.getAllBookmarkedNews())
-            .thenReturn(mockBookmarkResponse);
+            .thenReturn(dataHelper?.mockBookmarkResponse);
 
         final result = viewModel.isBookmarked(News());
 
@@ -143,9 +146,9 @@ void main() {
 
       test("should return true when news is present in bookmarks", () {
         when(mockBookmarksRepository.getAllBookmarkedNews())
-            .thenReturn(mockBookmarkResponse);
+            .thenReturn(dataHelper?.mockBookmarkResponse);
 
-        final result = viewModel.isBookmarked(mockBookmarkResponse[0]);
+        final result = viewModel.isBookmarked(dataHelper?.mockBookmarkResponse[0]);
 
         expect(result, true);
       });

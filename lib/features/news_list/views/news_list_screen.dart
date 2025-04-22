@@ -36,9 +36,9 @@ class _NewsListScreenState extends State<NewsListScreen> {
                 .toList() ??
             [];
 
-        return Container(
-          color: Colors.white,
-          child: Column(
+        return Scaffold(
+          backgroundColor: Colors.white,
+          body: Column(
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),

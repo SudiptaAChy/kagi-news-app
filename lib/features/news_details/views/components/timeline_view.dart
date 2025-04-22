@@ -54,11 +54,9 @@ class TimelineView extends StatelessWidget {
         children: [
           SizedBox(
             width: 80,
-            child: Expanded(
-              child: Text(
-                date,
-                style: Theme.of(context).textTheme.labelLarge,
-              ),
+            child: Text(
+              date,
+              style: Theme.of(context).textTheme.labelLarge,
             ),
           ),
           CircleAvatar(radius: 6, backgroundColor: Colors.blue[200]),

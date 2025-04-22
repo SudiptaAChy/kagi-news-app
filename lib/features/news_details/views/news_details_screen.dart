@@ -227,7 +227,7 @@ class NewsDetailsScreen extends StatelessWidget {
                 showSerial: true,
               ),
 
-            // Performance Statictics
+            // Performance Statistics
             if (news.performanceStatistics?.isNotEmpty == true)
               Card(
                 elevation: 0,

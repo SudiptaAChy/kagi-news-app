@@ -27,6 +27,12 @@ void main() {
     when(viewModel.isBookmarked(any)).thenReturn(true);
   });
 
+  tearDown(() {
+    dataHelper = null;
+    viewModel.dispose();
+    resetMockitoState();
+  });
+
   Widget buildTestWidget() {
     final router = GoRouter(initialLocation: "/bookmark", routes: [
       GoRoute(
@@ -50,7 +56,8 @@ void main() {
   }
 
   group("BookmarkScreen", () {
-    testWidgets("should show no item found when bookmark is empty", (tester) async {
+    testWidgets("should show no item found when bookmark is empty",
+        (tester) async {
       when(viewModel.bookmarks).thenReturn([]);
 
       await tester.pumpWidget(buildTestWidget());
@@ -69,7 +76,8 @@ void main() {
       expect(find.text("News1"), findsOneWidget);
     });
 
-    testWidgets("should clear all bookmarks when delete icon tap", (tester) async {
+    testWidgets("should clear all bookmarks when delete icon tap",
+        (tester) async {
       when(viewModel.bookmarks).thenReturn(dataHelper?.bookmarks);
 
       await tester.pumpWidget(buildTestWidget());
@@ -86,15 +94,16 @@ void main() {
       verify(viewModel.clearAllBookmarks()).called(1);
     });
 
-    testWidgets("should navigate to news details screen when tapping on bookmarked news item", (tester) async {
+    testWidgets(
+        "should navigate to news details screen when tapping on bookmarked news item",
+        (tester) async {
       when(viewModel.bookmarks).thenReturn(dataHelper?.bookmarks);
 
       await tester.pumpWidget(buildTestWidget());
       await tester.pumpAndSettle();
 
       final newsItem = find.byWidgetPredicate(
-          (widget) => widget is NewsListItem && widget.news?.title == "News1"
-      );
+          (widget) => widget is NewsListItem && widget.news?.title == "News1");
 
       expect(newsItem, findsOneWidget);
 

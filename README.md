@@ -2,6 +2,17 @@
 
 A native-feeling modern Flutter app that displays the latest news articles categorized from [Kagi's Kite News API](https://kite.kagi.com). This app is designed with user experience, scalability, and performance in mind.
 
+## Table of Contents
+
+- [🚀 Features](#-features)
+- [🔧 Tech Stack](#-tech-stack)
+- [📦 Project Setup](#-project-setup)
+- [📲 App Installation](#-app-installation)
+- [🛠️ System Architecture](#️-system-architecture)
+- [🔀 Screen Flow Diagram](#-screen-flow-diagram)
+- [🎥 Screen Recording](#-screen-recording)
+- [📸 Screenshots](#-screenshots)
+
 ## 🚀 Features
 
 - ✅ Fetch and display news categories dynamically
@@ -75,10 +86,9 @@ The app is developed using **MVVM Repository pattern** architecture
 
 ## 🎥 Screen Recording
 
-<video width="640" height="360" controls>
-  <source src="./screenshots/screen_recorder.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+[▶️ Watch Demo Video on Google Drive](https://drive.google.com/file/d/1SVuCXZPU3tD7dalc39baoVRh4Tth20WJ/view?usp=sharing)
+
+<iframe src="https://drive.google.com/file/d/1SVuCXZPU3tD7dalc39baoVRh4Tth20WJ/view?usp=sharing" width="640" height="480"></iframe>
 
 ## 📸 Screenshots
 

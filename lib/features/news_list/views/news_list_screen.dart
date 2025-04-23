@@ -23,7 +23,9 @@ class _NewsListScreenState extends State<NewsListScreen> {
   @override
   void initState() {
     super.initState();
-    Provider.of<NewsViewModel>(context, listen: false).getNewsTopics();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<NewsViewModel>(context, listen: false).getNewsTopics();
+    });
   }
 
   @override

@@ -3,6 +3,7 @@
 A native-feeling modern Flutter app that displays the latest news articles categorized from [Kagi's Kite News API](https://kite.kagi.com). This app is designed with user experience, scalability, and performance in mind.
 
 ## 🚀 Features
+
 - ✅ Fetch and display news categories dynamically
 - ✅ Show news lists per category
 - ✅ Category can be selected and news of that category will be displayed
@@ -16,6 +17,7 @@ A native-feeling modern Flutter app that displays the latest news articles categ
 - ✅ Unit and widget tests included
 
 ## 🔧 Tech Stack
+
 - **Flutter** (Channel stable, 3.27.3)
 - **Dart**
 - **Provider** (for state management and routing)
@@ -35,40 +37,51 @@ A native-feeling modern Flutter app that displays the latest news articles categ
 - **build_runner** (for auto generation of boilerplate code)
 
 ## 📦 Project Setup
+
 1. Clone the Repo
+
 ```bash
 git clone https://github.com/SudiptaAChy/kagi-news-app.git
 cd kagi-news-app
 ```
+
 2. Install Dependencies
+
 ```bash
 flutter clean
 flutter pub get
 ```
+
 3. Run on a specific device using flutter devices and `flutter run -d <device_id>`
 4. Run all test code
+
 ```bash
 flutter test
 ```
 
 ## 📲 App Installation
+
 Download the app from below link: \
 [apk](https://portal.testapp.io/apps/install/mzyOmL5n5QZKy)
 
 ## 🛠️ System Architecture
+
 The app is developed using **MVVM Repository pattern** architecture
 <img src="./screenshots/system architecture.png" alt="System Architecture"/>
 
 ## 🔀 Screen Flow Diagram
+
 <img src="./screenshots/screen flow diagram.png" alt="System Architecture"/>
 
 ## 🎥 Screen Recording
+
 <video width="640" height="360" controls>
   <source src="./screenshots/screen_recorder.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 
 ## 📸 Screenshots
+
 <table>
 <caption>News Screen</caption>
   <tr>
@@ -76,5 +89,25 @@ The app is developed using **MVVM Repository pattern** architecture
     <td><img src="./screenshots/ss2.jpg" alt="Logo 2" width="200"></td>
     <td><img src="./screenshots/ss3.jpg" alt="Logo 3" width="200"></td>
     <td><img src="./screenshots/ss4.jpg" alt="Logo 4" width="200"></td>
+  </tr>
+</table>
+<table>
+<caption>News Details Screen</caption>
+  <tr>
+    <td><img src="./screenshots/ss5.jpg" alt="Logo 1" width="200"></td>
+    <td><img src="./screenshots/ss6.jpg" alt="Logo 2" width="200"></td>
+    <td><img src="./screenshots/ss7.jpg" alt="Logo 3" width="200"></td>
+    <td><img src="./screenshots/ss8.jpg" alt="Logo 4" width="200"></td>
+  </tr>
+  <tr>
+    <td><img src="./screenshots/ss9.jpg" alt="Logo 3" width="200"></td>
+    <td><img src="./screenshots/ss10.jpg" alt="Logo 4" width="200"></td>
+  </tr>
+</table>
+<table>
+<caption>Bookmark Screen</caption>
+  <tr>
+    <td><img src="./screenshots/ss11.jpg" alt="Logo 1" width="200"></td>
+    <td><img src="./screenshots/ss12.jpg" alt="Logo 2" width="200"></td>
   </tr>
 </table>

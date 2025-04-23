@@ -10,22 +10,18 @@ class MockNewsViewModelDataHelper {
     NewsTopic(name: "Tech", file: "tech.json"),
   ]);
 
-  final mockNewsResponse = NewsResponse(
-    category: "World",
-    timestamp: 10,
-    news: [
-      News(title: "News1"),
-      News(title: "News2"),
-    ],
-    events: []
-  );
+  final mockNewsResponse =
+      NewsResponse(category: "World", timestamp: 10, news: [
+    News(title: "News1"),
+    News(title: "News2"),
+  ], events: []);
 
   final mockEventsResponse = NewsResponse(
     timestamp: 10,
     news: [],
     events: [
-      Event(type: EventType.EVENT, content: "Event1"),
-      Event(type: EventType.PEOPLE, content: "Person1"),
+      Event(type: EventType.event, content: "Event1"),
+      Event(type: EventType.people, content: "Person1"),
     ],
   );
 

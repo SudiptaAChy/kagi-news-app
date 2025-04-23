@@ -105,10 +105,10 @@ class _NewsListScreenState extends State<NewsListScreen> {
     if (viewModel.news?.events?.isEmpty == true) return NoItemFoundView();
 
     final events = viewModel.news?.events
-        ?.where((event) => event.type == EventType.EVENT)
+        ?.where((event) => event.type == EventType.event)
         .toList();
     final peoples = viewModel.news?.events
-        ?.where((event) => event.type == EventType.PEOPLE)
+        ?.where((event) => event.type == EventType.people)
         .toList();
 
     return SingleChildScrollView(

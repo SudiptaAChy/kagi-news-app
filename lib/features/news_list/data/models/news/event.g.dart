@@ -57,21 +57,21 @@ class EventTypeAdapter extends TypeAdapter<EventType> {
   EventType read(BinaryReader reader) {
     switch (reader.readByte()) {
       case 0:
-        return EventType.EVENT;
+        return EventType.event;
       case 1:
-        return EventType.PEOPLE;
+        return EventType.people;
       default:
-        return EventType.EVENT;
+        return EventType.event;
     }
   }
 
   @override
   void write(BinaryWriter writer, EventType obj) {
     switch (obj) {
-      case EventType.EVENT:
+      case EventType.event:
         writer.writeByte(0);
         break;
-      case EventType.PEOPLE:
+      case EventType.people:
         writer.writeByte(1);
         break;
     }

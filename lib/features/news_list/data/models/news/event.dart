@@ -7,7 +7,7 @@ part 'event.g.dart';
 class Event extends HiveObject {
   @HiveField(0)
   String? year;
-  
+
   @HiveField(1)
   String? content;
 
@@ -45,14 +45,15 @@ class Event extends HiveObject {
 
 @HiveType(typeId: 9)
 enum EventType {
-   @HiveField(0)
-  EVENT,
-  
-   @HiveField(1)
-  PEOPLE
+  @HiveField(0)
+  event,
+
+  @HiveField(1)
+  people
 }
 
-final typeValues = EnumValues({"event": EventType.EVENT, "people": EventType.PEOPLE});
+final typeValues =
+    EnumValues({"event": EventType.event, "people": EventType.people});
 
 class EnumValues<T> {
   Map<String, T> map;

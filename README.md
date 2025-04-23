@@ -88,8 +88,6 @@ The app is developed using **MVVM Repository pattern** architecture
 
 [▶️ Watch Demo Video on Google Drive](https://drive.google.com/file/d/1SVuCXZPU3tD7dalc39baoVRh4Tth20WJ/view?usp=sharing)
 
-<iframe src="https://drive.google.com/file/d/1SVuCXZPU3tD7dalc39baoVRh4Tth20WJ/view?usp=sharing" width="640" height="480"></iframe>
-
 ## 📸 Screenshots
 
 <table>

@@ -19,61 +19,61 @@ class _BookmarkScreenState extends State<BookmarkScreen> {
   @override
   void initState() {
     super.initState();
-    Provider.of<BookmarkViewmodel>(context, listen: false).getAllBookmarks();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<BookmarkViewmodel>(context, listen: false).getAllBookmarks();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        surfaceTintColor: Colors.white,
-        actions: [
-          IconButton(
-            onPressed: () =>
-                Provider.of<BookmarkViewmodel>(context, listen: false)
-                    .clearAllBookmarks(),
-            icon: Icon(
-              Icons.delete,
-              color: Colors.red,
-            ),
+    return Consumer<BookmarkViewmodel>(
+        builder: (context, viewModel, _) => Scaffold(
+          backgroundColor: Colors.white,
+          appBar: AppBar(
+            backgroundColor: Colors.white,
+            surfaceTintColor: Colors.white,
+            actions: [
+              IconButton(
+                onPressed: () =>
+                    viewModel.clearAllBookmarks(),
+                icon: Icon(
+                  Icons.delete,
+                  color: Colors.red,
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
-      body: Consumer<BookmarkViewmodel>(
-        builder: (context, viewModel, _) =>
-            (viewModel.bookmarks?.isNotEmpty == true)
-                ? ListView.builder(
-                    itemCount: viewModel.bookmarks?.length,
-                    itemBuilder: (context, index) {
-                      final news = viewModel.bookmarks?[index];
-                      final isBookmarked = viewModel.isBookmarked(news);
-                      return InkWell(
-                        onTap: () => context.pushNamed(
-                          RouteNames.details,
-                          extra: NewsDetailsArgs(
-                            news!,
-                            isBookmarked,
-                                () => viewModel.addToBookmark(news),
-                                () => viewModel.removeFromBookmark(news),
-                          ),
-                        ),
-                        child: NewsListItem(
-                          news: news,
-                          isBookmarked: isBookmarked,
-                          onBookmarkAdd: () async =>
-                              await viewModel.addToBookmark(news),
-                          onBookmarkRemove: () async =>
-                              await viewModel.removeFromBookmark(news),
-                        ),
-                      );
-                    },
-                  )
-                : Center(
-                    child: NoItemFoundView(),
+          body: (viewModel.bookmarks?.isNotEmpty == true)
+              ? ListView.builder(
+            itemCount: viewModel.bookmarks?.length,
+            itemBuilder: (context, index) {
+              final news = viewModel.bookmarks?[index];
+              final isBookmarked = viewModel.isBookmarked(news);
+              return InkWell(
+                onTap: () => context.pushNamed(
+                  RouteNames.details,
+                  extra: NewsDetailsArgs(
+                    news!,
+                    isBookmarked,
+                        () => viewModel.addToBookmark(news),
+                        () => viewModel.removeFromBookmark(news),
                   ),
-      ),
+                ),
+                child: NewsListItem(
+                  news: news,
+                  isBookmarked: isBookmarked,
+                  onBookmarkAdd: () async =>
+                  await viewModel.addToBookmark(news),
+                  onBookmarkRemove: () async =>
+                  await viewModel.removeFromBookmark(news),
+                ),
+              );
+            },
+          )
+              : Center(
+            child: NoItemFoundView(),
+          ),
+        ),
     );
   }
 }

@@ -72,9 +72,9 @@ The app is developed using **MVVM Repository pattern** architecture
 <table>
 <caption>News Screen</caption>
   <tr>
-    <td><img src="./screenshots/ss1.jpg" alt="Logo 1" width="100"></td>
-    <td><img src="./screenshots/ss2.jpg" alt="Logo 2" width="100"></td>
-    <td><img src="./screenshots/ss3.jpg" alt="Logo 3" width="100"></td>
-    <td><img src="./screenshots/ss4.jpg" alt="Logo 4" width="100"></td>
+    <td><img src="./screenshots/ss1.jpg" alt="Logo 1" width="200"></td>
+    <td><img src="./screenshots/ss2.jpg" alt="Logo 2" width="200"></td>
+    <td><img src="./screenshots/ss3.jpg" alt="Logo 3" width="200"></td>
+    <td><img src="./screenshots/ss4.jpg" alt="Logo 4" width="200"></td>
   </tr>
 </table>

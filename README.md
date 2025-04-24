@@ -72,8 +72,10 @@ flutter test
 
 ## 📲 App Installation
 
-Download the app from below link: \
-[apk](https://portal.testapp.io/apps/install/mzyOmL5n5QZKy)
+Install the app by:
+- Downlaoding the [apk](https://portal.testapp.io/apps/install/mzyOmL5n5QZKy)
+- Or, scan this QR code <br>
+<img src="./screenshots/download_qr.png" alt="APK QR"/>
 
 ## 🛠️ System Architecture
 

@@ -10,8 +10,10 @@ import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await DbService.init();
-  await HiveBoxes.init();
+  await Future.wait([
+    DbService.init(),
+    HiveBoxes.init(),
+  ]);
   setupDI();
   runApp(const MyApp());
 }

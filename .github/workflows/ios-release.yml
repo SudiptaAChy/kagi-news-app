@@ -1,0 +1,44 @@
+name: iOS Release
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - name: Clone source code
+        uses: actions/checkout@v4
+
+      - name: Setup flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+          flutter-version: "3.27.3"
+          cache: true
+
+      - name: Verify flutter version
+        run: flutter --version
+
+      - name: Get dependencies
+        run: flutter pub get
+
+      - name: Analyze the code
+        run: flutter analyze
+
+      - name: Run tests
+        run: flutter test
+
+      - name: Build IPA
+        run: flutter build ipa --no-codesign
+
+      - name: Compress Archives and IPAs
+        run: |
+          cd build
+          tar -czf ios_build.tar.gz ios
+
+      - name: Upload IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-ipa
+          path: build/ios_build.tar.gz
